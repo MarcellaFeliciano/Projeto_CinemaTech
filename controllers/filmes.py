@@ -1,25 +1,33 @@
-from flask import Flask, render_template, request, redirect, url_for
-from app import app 
+from flask import render_template, Blueprint, url_for, request, flash, redirect
+from models.filme import Filme, Sessao
 
-filmes = []
-sessoes = []
+# módulo de usuários
+bp = Blueprint('filmes', __name__, url_prefix='/filmes')
 
-@app.route('/')
+@bp.route('/')
 def index():
-    return render_template('index.html', filmes=filmes, sessoes=sessoes)
+    return render_template('filmes/index.html', filmes = Filme.all(), sessoes = Sessao.all())
+  
 
-@app.route('/add_filme', methods=['POST'])
+@bp.route('/add_filme', methods=['POST','GET'])
 def add_filme():
-    titulo = request.form['titulo']
-    genero = request.form['genero']
-    if titulo and genero:
-        filmes.append({'titulo': titulo, 'genero': genero})
-    return redirect(url_for('index'))
+    if request.method == 'POST':
+        titulo = request.form['titulo']
+        genero = request.form['genero']
+        duracao = request.form['duracao']
+        if titulo and genero:
+            Filme.add_filme(titulo=titulo, genero=genero, duracao=duracao)
+            #filmes.append({'titulo': titulo, 'genero': genero})
+        return redirect(url_for('filmes.index'))
 
-@app.route('/add_sessao', methods=['POST'])
+@bp.route('/add_sessao', methods=['POST','GET'])
 def add_sessao():
-    filme = request.form['filme']
-    horario = request.form['horario']
-    if filme and horario:
-        sessoes.append({'filme': filme, 'horario': horario})
-    return redirect(url_for('index'))
+    if request.method == 'POST':
+        filme = request.form['filme']
+        horario = request.form['horario']
+        sala = request.form['sala']
+        if filme and horario and sala:
+
+            Sessao.add_sessao(filme_id=filme, horario=horario, sala=sala)
+            #sessoes.append({'filme': filme, 'horario': horario})
+        return redirect(url_for('filmes.index'))

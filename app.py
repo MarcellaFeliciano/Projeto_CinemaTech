@@ -1,7 +1,9 @@
 from flask import Flask, request, render_template, url_for, session
 
-from controllers import clientes
+from controllers import clientes, filmes, gerentes
 from models.cliente import Cliente
+from models.filme import Filme, Sessao
+from models.gerente import Gerente
 from flask_login import LoginManager
 
 from database import db
@@ -34,6 +36,8 @@ with app.app_context():
     db.create_all()     
                                                                                   
 app.register_blueprint(clientes.bp)
+app.register_blueprint(filmes.bp)
+app.register_blueprint(gerentes.bp)
 
 @app.route ('/')
 def index ():

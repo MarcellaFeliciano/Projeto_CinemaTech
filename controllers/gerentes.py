@@ -2,12 +2,31 @@ from flask import render_template, Blueprint, url_for, request, flash, redirect,
 from models.gerente import Gerente
 
 
-# módulo de usuários
 bp = Blueprint('gerentes', __name__, url_prefix='/gerentes')
 
 @bp.route('/')
 def index():
     return render_template('gerentes/index.html', gerentes = Gerente.all())
+
+
+@bp.route('/cadastrar_gerente', methods=['POST', 'GET'])
+def cadastrar_gerente():
+    if request.method == 'POST':
+        email = request.form['email']
+        senha = request.form['senha']
+        nome=request.form['nome']
+
+        if not email:
+            flash('Email é obrigatório')
+
+        if '@admin.com' not in email:
+            flash('Email de administrador não compatível! (@admin.com necessário)')
+        else:
+            Gerente.add_gerente(nome=nome,email=email,senha=senha)
+            session['gerente'] = nome
+            return redirect(url_for('gerentes.index'))
+    
+    return render_template('gerentes/cadastrar.html')
 
 
 @bp.route('/login_gerente', methods=['GET', 'POST'])
