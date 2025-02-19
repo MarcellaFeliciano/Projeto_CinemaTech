@@ -7,7 +7,32 @@
 </head>
 <body>
     <div class="container">
-        <h2>Cadastro de Filmes</h2>
+        <header>
+            <h1> CINETECH</h1>
+            <a href="{{ url_for('filmes.index')}}">Filmes</a>
+            <a href="{{ url_for('filmes.index')}}">Lançamento</a>
+            <a href="{{ url_for('filmes.index')}}">Avaliações</a>
+            <a href="{{ url_for('filmes.index')}}">Programação</a>
+            <a href="{{ url_for('filmes.index')}}">Reserva</a>
+            <a href="{{ url_for('filmes.index')}}">Login</a>
+        </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <h2>Cadastro de Filmes</h2>
         <form action="/add_filme" method="POST">
             <label for="titulo">Título do Filme:</label>
             <input type="text" name="titulo" required>
@@ -46,6 +71,6 @@
                 <li>{{ sessao.filme }} - {{ sessao.horario }}</li>
             {% endfor %}
         </ul>
-    </div>
+    </div> -->
 </body>
 </html>
