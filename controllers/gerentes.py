@@ -8,6 +8,7 @@ bp = Blueprint('gerentes', __name__, url_prefix='/gerentes')
 def index():
     return render_template('gerentes/index.html', gerentes = Gerente.all())
 
+"""
 
 @bp.route('/cadastrar_gerente', methods=['POST', 'GET'])
 def cadastrar_gerente():
@@ -29,19 +30,19 @@ def cadastrar_gerente():
     return render_template('gerentes/cadastrar.html')
 
 
+"""
 @bp.route('/login_gerente', methods=['GET', 'POST'])
 def login_gerente():
 
     if request.method == 'GET':
         return render_template('gerentes/login.html')
     else:
-        nome = request.form['nome']
         email = request.form['email']
         senha = request.form['senha']
         gerente = Gerente.get_by_email(email)
 
         if gerente and gerente.senha == senha:
-            session['gerente'] = nome
+            session['gerente'] = email
             return redirect(url_for('gerentes.index'))
         else:
             flash('Dados incorretos.')

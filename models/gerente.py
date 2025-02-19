@@ -4,7 +4,6 @@ from database import db
 
 class Gerente(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    nome: Mapped[str] = mapped_column()
     email: Mapped[str] = mapped_column(unique=True)
     senha: Mapped[str] = mapped_column()
 
@@ -21,8 +20,8 @@ class Gerente(db.Model):
         return cls.query.filter_by(email=email).first()
 
     @classmethod
-    def add_gerente(cls, nome, email, senha):
-        gerente = cls(nome=nome, email=email, senha=senha)
+    def add_gerente(cls, email, senha):
+        gerente = cls(email=email, senha=senha)
         db.session.add(gerente)
         db.session.commit()
 
@@ -31,3 +30,4 @@ class Gerente(db.Model):
         gerente = cls.get(id)
         gerente.email = email
         db.session.commit()
+

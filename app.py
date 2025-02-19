@@ -34,6 +34,14 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 db.init_app(app)
 with app.app_context():
     db.create_all()     
+    existing_gerente = db.session.query(Gerente).filter_by(email='admin@admin.com').first()
+    if existing_gerente:
+        print("E-mail já cadastrado.")
+    else:
+        # Inserir novo gerente
+        novo_gerente = Gerente(email='admin@admin.com', senha='123')
+        db.session.add(novo_gerente)
+        db.session.commit()
                                                                                   
 app.register_blueprint(clientes.bp)
 app.register_blueprint(filmes.bp)
