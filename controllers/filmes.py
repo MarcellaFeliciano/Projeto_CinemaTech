@@ -1,7 +1,7 @@
 from flask import render_template, Blueprint, url_for, request, flash, redirect
 from models.filme import Filme, Sessao
 
-# módulo de usuários
+# módulo de usuários juhiugihihk
 bp = Blueprint('filmes', __name__, url_prefix='/filmes')
 
 @bp.route('/')
