@@ -49,4 +49,11 @@ app.register_blueprint(gerentes.bp)
 
 @app.route ('/')
 def index ():
+    if 'gerente' in session:
+        gerente = session['gerente']
+        return render_template('index.html', gerente=gerente,filmes = Filme.all(), sessoes = Sessao.all())
+    elif 'user' in session:
+        user = session['user']
+        return render_template('index.html', user=user,filmes = Filme.all(), sessoes = Sessao.all())
+    
     return render_template ('index.html')

@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, url_for, request, flash, redirect
+from flask import render_template, Blueprint, url_for, request, flash, redirect, session
 from models.filme import Filme, Sessao
 
 # módulo de usuários juhiugihihk
@@ -6,6 +6,13 @@ bp = Blueprint('filmes', __name__, url_prefix='/filmes')
 
 @bp.route('/')
 def index():
+    if 'gerente' in session:
+        gerente = session['gerente']
+        return render_template('filmes/index.html', gerente=gerente,filmes = Filme.all(), sessoes = Sessao.all())
+    elif 'user' in session:
+        user = session['user']
+        return render_template('filmes/index.html', user=user,filmes = Filme.all(), sessoes = Sessao.all())
+    
     return render_template('filmes/index.html', filmes = Filme.all(), sessoes = Sessao.all())
   
 

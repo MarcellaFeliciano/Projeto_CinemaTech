@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>Criar Sessão</h2>
+    <form action="{{ url_for('filmes.add_sessao') }}" method="POST">
+        <label for="filme">Filme:</label>
+        <select name="filme" required>
+            {% for filme in filmes %}
+                <option value="{{ filme.id }}">{{ filme.titulo }}</option>
+            {% endfor %}
+        </select>
+        
+        <label for="horario">Horário:</label>
+        <input type="time" name="horario" required>
+        
+        <label for="sala">Sala da sessão:</label>
+        <input type="text" name="sala" required>
+        
+        <button type="submit">Criar Sessão</button>
+    </form>
+    
+</body>
+</html>

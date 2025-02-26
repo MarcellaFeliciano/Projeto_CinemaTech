@@ -4,73 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Cadastro de Filmes</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
     <div class="container">
-        <header>
+
+        <!-- <header>
             <h1> CINETECH</h1>
             <a href="{{ url_for('filmes.index')}}">Filmes</a>
             <a href="{{ url_for('filmes.index')}}">Lançamento</a>
             <a href="{{ url_for('filmes.index')}}">Avaliações</a>
             <a href="{{ url_for('filmes.index')}}">Programação</a>
             <a href="{{ url_for('filmes.index')}}">Reserva</a>
-            <a href="{{ url_for('filmes.index')}}">Login</a>
-        </header>
 
+            {% if user: %}
+            <a href="{{ url_for('clientes.logout')}}">Logout</a>
+            {% elif gerente: %}
+            <a href="{{ url_for('gerentes.logout')}}">Logout</a>
+            {% else %}
+            <a href="{{ url_for('clientes.login_cliente')}}">Login</a>
+            {% endif %}
 
+        </header>-->
 
+    <div class="container">
+        <div class="header">
+            <div class="menu">
+                <h2>CINETECH</h2>
+                <div class="opcoes">
+                    <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
+                    <a href="{{ url_for('filmes.index')}}"><button>Lançamento</button></a>
+                    <a href="{{ url_for('filmes.index')}}"><button>Avaliações</button></a>
+                    <a href="{{ url_for('filmes.index')}}"><button>Programação</button></a>
+                    <a href="{{ url_for('filmes.index')}}"><button>Reserva</button></a>
+                    {% if user: %}
+                    <a href="{{ url_for('clientes.logout')}}"><button>Logout</button></a>
+                    {% elif gerente: %}
+                    <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
+                    {% else %}
+                    <a href="{{ url_for('clientes.login_cliente')}}"><button>Login</button></a>
+                    {% endif %}
 
+                </div>
+            </div>
+            <div class="deadpool"></div>
+        </div>
+        <div class="main">
+            <div class="procurador">
+                <div class="filtros">
+                    <select name="categoria" id="categoria" required>
+                        <option value="" disabled selected>Gênero</option>
+                        <option value="Eletrodoméstico">A</option>
+                        <option value="Eletrodoméstico">B</option>
+                    </select>
+                    <select name="categoria" id="categoria" required>
+                        <option value="" disabled selected>Lançamento</option>
+                        <option value="Eletrodoméstico">A</option>
+                        <option value="Eletrodoméstico">B</option>
+                    </select>
+                    <select name="categoria" id="categoria" required>
+                        <option value="" disabled selected>Avalição</option>
+                        <option value="Eletrodoméstico">A</option>
+                        <option value="Eletrodoméstico">B</option>
+                    </select>
+                </div>
+                <a href=""><button>🔍︎ Pesquisar</button></a>
+            </div>
+            <br>
+            <div class="conteudo">
+                <div class="filme">
+                    <h3>FILME 1</h3>
+                </div>
+                <div class="filme">
+                    <h3>FILME 2</h3>
+                </div>
+                <div class="filme">
+                    <h3>FILME 3</h3>
+                </div>
+                <div class="filme">
+                    <h3>FILME 4</h3>
+                </div>
+                <div class="filme">
+                    <h3>FILME 5</h3>
+                </div>
+                <div class="filme">
+                    <h3>FILME 6</h3>
+                </div>
+                <div class="filme">
+                    <h3>FILME 7</h3>
+                </div>
+                <div class="filme">
+                    <h3>FILME 8</h3>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-        <!-- <h2>Cadastro de Filmes</h2>
-        <form action="/add_filme" method="POST">
-            <label for="titulo">Título do Filme:</label>
-            <input type="text" name="titulo" required>
-            
-            <label for="genero">Gênero:</label>
-            <input type="text" name="genero" required>
-            
-            <button type="submit">Adicionar Filme</button>
-        </form>
-        
-        <h2>Criar Sessão</h2>
-        <form action="/add_sessao" method="POST">
-            <label for="filme">Filme:</label>
-            <select name="filme" required>
-                {% for filme in filmes %}
-                    <option value="{{ filme.titulo }}">{{ filme.titulo }}</option>
-                {% endfor %}
-            </select>
-            
-            <label for="horario">Horário:</label>
-            <input type="time" name="horario" required>
-            
-            <button type="submit">Criar Sessão</button>
-        </form>
-        
-        <h2>Filmes Cadastrados</h2>
-        <ul>
-            {% for filme in filmes %}
-                <li>{{ filme.titulo }} ({{ filme.genero }})</li>
-            {% endfor %}
-        </ul>
-        
-        <h2>Sessões Criadas</h2>
-        <ul>
-            {% for sessao in sessoes %}
-                <li>{{ sessao.filme }} - {{ sessao.horario }}</li>
-            {% endfor %}
-        </ul>
-    </div> -->
 </body>
 </html>

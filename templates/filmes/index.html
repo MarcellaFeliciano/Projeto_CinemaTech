@@ -6,52 +6,47 @@
     <title>Admin - Cadastro de Filmes</title>
 </head>
 <body>
-    <div class="container">
-        <h2>Cadastro de Filmes</h2>
-        <form action="{{ url_for('filmes.add_filme') }}" method="POST">
-            <label for="titulo">Título do Filme:</label>
-            <input type="text" name="titulo" required>
-            
-            <label for="genero">Gênero:</label>
-            <input type="text" name="genero" required>
-            
-            <label for="duracao">Duração:</label>
-            <input type="text" name="duracao" required>
-            
-            <button type="submit">Adicionar Filme</button>
-        </form>
-        
-        <h2>Criar Sessão</h2>
-        <form action="{{ url_for('filmes.add_sessao') }}" method="POST">
-            <label for="filme">Filme:</label>
-            <select name="filme" required>
+    <div class="container"> 
+
+        <aside>
+            <h1> CINETECH</h1>
+            <a href="{{ url_for('filmes.index')}}">Filmes</a>
+            <a href="{{ url_for('filmes.index')}}">Lançamento</a>
+            <a href="{{ url_for('filmes.index')}}">Avaliações</a>
+            <a href="{{ url_for('filmes.index')}}">Programação</a>
+            <a href="{{ url_for('filmes.index')}}">Reserva</a>
+
+            {%if gerente: %}
+            <a href="{{ url_for('filmes.add_filme')}}">Adicionar Filme</a>
+            <a href="{{ url_for('filmes.add_sessao')}}">Adicionar Sessão</a>
+            {% endif %}
+
+            {% if user: %}
+            <a href="{{ url_for('clientes.logout')}}">Logout</a>
+            {% elif gerente: %}
+            <a href="{{ url_for('gerentes.logout')}}">Logout</a>
+            {% else %}
+            <a href="{{ url_for('clientes.login_cliente')}}">Login</a>
+            {% endif %}
+
+        </aside>
+        <main>
+
+            <h2>Filmes Cadastrados</h2>
+            <ul>
                 {% for filme in filmes %}
-                    <option value="{{ filme.id }}">{{ filme.titulo }}</option>
+                    <li>{{ filme.titulo }} ({{ filme.genero }})</li>
                 {% endfor %}
-            </select>
+            </ul>
             
-            <label for="horario">Horário:</label>
-            <input type="time" name="horario" required>
-            
-            <label for="sala">Sala da sessão:</label>
-            <input type="text" name="sala" required>
-            
-            <button type="submit">Criar Sessão</button>
-        </form>
-        
-        <h2>Filmes Cadastrados</h2>
-        <ul>
-            {% for filme in filmes %}
-                <li>{{ filme.titulo }} ({{ filme.genero }})</li>
-            {% endfor %}
-        </ul>
-        
-        <h2>Sessões Criadas</h2>
-        <ul>
-            {% for sessao in sessoes %}
-                <li>{{ sessao.filme_id }} - {{ sessao.horario }}</li>
-            {% endfor %}
-        </ul>
+            <h2>Sessões Criadas</h2>
+            <ul>
+                {% for sessao in sessoes %}
+                    <li>{{ sessao.filme_id }} - {{ sessao.horario }}</li>
+                {% endfor %}
+            </ul>
+
+        </main>
     </div>
 </body>
 </html>

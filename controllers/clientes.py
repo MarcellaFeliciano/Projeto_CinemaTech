@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, url_for, request, flash, redirect
+from flask import render_template, Blueprint, url_for, request, session,flash, redirect
 from models.cliente import Cliente
 
 from flask_login import login_required, login_user, logout_user, current_user
@@ -8,6 +8,9 @@ bp = Blueprint('clientes', __name__, url_prefix='/clientes')
 
 @bp.route('/')
 def index():
+    if 'user' in session:
+        user = session['user']
+        return render_template('clientes/index.html', user=user)
     return render_template('clientes/index.html', clientes = Cliente.all())
 
 @bp.route('/cadastrar_cliente', methods=['POST', 'GET'])
@@ -21,6 +24,7 @@ def cadastrar_cliente():
             flash('Email é obrigatório')
         else:
             Cliente.add_cliente(nome=nome,email=email,senha=senha)
+            session['user'] = nome
             return redirect(url_for('clientes.index'))
     
     return render_template('clientes/cadastrar.html')
@@ -42,6 +46,7 @@ def login_cliente():
 
         if cliente and cliente.senha == senha:
             login_user(cliente)
+            session['user'] = cliente.nome
             return redirect(url_for('clientes.index'))
         else:
             flash('Dados incorretos.')
@@ -52,4 +57,5 @@ def login_cliente():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('clientes.index'))
+    session.pop('user', None)
+    return redirect(url_for('index'))

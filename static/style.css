@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    width: 100dvw;
+    height: 170dvh;
+    background-color: blue;
+}
+.container {
+    width: 100vw;
+    height: 170vh;
+    background-color: brown;
+}
+.header {
+    width: 100vw;
+    height: 65vh;
+    background-color: cadetblue;
+    padding: 20px;
+}
+.menu {
+    width: 95vw;
+    height: 38px;
+    background-color: crimson;
+    margin: 0px 15px 0px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    justify-content: space-between;
+}
+.opcoes a {
+    margin: 5px;
+}
+.deadpool {
+    width: 20vw;
+    height: 53vh;
+    margin: 15px;
+    background-image: url('imgs/deadpoolandwolverine.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+.main {
+    width: 100vw;
+    height: 150vh;
+    background-color: chocolate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.procurador {
+    width: 95vw;
+    height: 38px;
+    background-color: crimson;
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    justify-content: space-between;
+}
+.conteudo {
+    width: 95vw;
+    height: 130vh;
+    background-color: darkolivegreen;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.filme {
+    width: 22vw;
+    height: 60vh;
+    background-color: darkslateblue;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
