@@ -43,10 +43,8 @@ with app.app_context():
         db.session.add(novo_gerente)
         db.session.commit()
 
-    count = Filme.query.count()
-    if count > 0:
-        print('já existem generos')
-    else:
+    count = int(Filme.query.count())
+    if count == 0:
         g1 = Genero(nome='Ficção Científica')
         g2 = Genero(nome='Ação')
         g3 = Genero(nome='Romance')
@@ -55,6 +53,8 @@ with app.app_context():
 
         db.session.add_all([g1,g2,g3,g4,g5])
         db.session.commit()
+    else:
+        print('já existem generos')
 
 
 app.register_blueprint(clientes.bp)

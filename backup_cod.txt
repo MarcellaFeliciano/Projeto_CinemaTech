@@ -1,0 +1,44 @@
+
+filmes_generos = Table(
+    'filmes_generos',
+    db.Model.metadata,
+    Column('filmes_id', ForeignKey('filme.id'), primary_key=True),
+    Column('generos_id', ForeignKey('genero.id'), primary_key=True)
+)
+
+class Genero(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    nome: Mapped[str] = mapped_column() 
+    filmes = relationship('filme', secondary=filmes_generos, back_populates='generos') 
+
+
+class Filme(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    titulo: Mapped[str] = mapped_column()
+    duracao: Mapped[str] = mapped_column()
+    generos: Mapped[List['Genero']] = relationship('Genero', secondary=filmes_generos, back_populates='filmes') 
+
+    @classmethod
+    def all(cls):
+        return db.session.query(cls).all()
+
+    @classmethod
+    def get(cls, id):
+        return cls.query.get_or_404(id)
+
+    @classmethod
+    def get_by_titulo(cls, titulo):
+        return cls.query.filter_by(titulo=titulo).first()
+
+    @classmethod
+    def add_filme(cls, titulo, duracao):
+        filme = cls(titulo=titulo, duracao=duracao)
+
+        db.session.add(filme)
+        db.session.commit()
+
+    @classmethod
+    def edit_titulo(cls, id, titulo):
+        filme = cls.get(id)
+        filme.titulo = titulo
+        db.session.commit()

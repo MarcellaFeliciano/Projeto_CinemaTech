@@ -5,6 +5,7 @@ from typing import List
 from database import db
 
 
+# Tabela associativa para o relacionamento muitos-para-muitos
 filmes_generos = Table(
     'filmes_generos',
     db.Model.metadata,
@@ -13,17 +14,22 @@ filmes_generos = Table(
 )
 
 class Genero(db.Model):
+    __tablename__ = 'genero'  # Adicionando o nome da tabela
     id: Mapped[int] = mapped_column(primary_key=True)
-    nome: Mapped[str] = mapped_column() 
-    filmes = relationship('filme', secondary=filmes_generos, back_populates='generos') 
+    nome: Mapped[str] = mapped_column(nullable=False)  # Adicionando nullable=False
 
+    # Relação com Filme
+    filmes: Mapped[List['Filme']] = relationship('Filme', secondary=filmes_generos, back_populates='generos')
 
 class Filme(db.Model):
+    __tablename__ = 'filme'  # Adicionando o nome da tabela
     id: Mapped[int] = mapped_column(primary_key=True)
-    titulo: Mapped[str] = mapped_column()
-    duracao: Mapped[str] = mapped_column()
-    generos: Mapped[List['Genero']] = relationship('Genero', secondary=filmes_generos, back_populates='filmes') 
+    titulo: Mapped[str] = mapped_column(nullable=False)  # Adicionando nullable=False
+    duracao: Mapped[str] = mapped_column(nullable=False)  # Adicionando nullable=False
 
+    # Relação com Genero
+    generos: Mapped[List[Genero]] = relationship('Genero', secondary=filmes_generos, back_populates='filmes')
+    
     @classmethod
     def all(cls):
         return db.session.query(cls).all()
@@ -38,8 +44,10 @@ class Filme(db.Model):
 
     @classmethod
     def add_filme(cls, titulo, genero, duracao):
-        filme = cls(titulo=titulo, genero=genero, duracao=duracao)
-        
+        filme = cls(titulo=titulo, duracao=duracao)
+    
+        # Associe o filme ao gênero
+        filme.generos.append(genero)
         db.session.add(filme)
         db.session.commit()
 
