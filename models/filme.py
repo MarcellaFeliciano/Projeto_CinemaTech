@@ -1,12 +1,28 @@
 
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import ForeignKey, Column, Table
+from typing import List
 from database import db
+
+
+filmes_generos = Table(
+    'filmes_generos',
+    db.Model.metadata,
+    Column('filmes_id', ForeignKey('filme.id'), primary_key=True),
+    Column('generos_id', ForeignKey('genero.id'), primary_key=True)
+)
+
+class Genero(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    nome: Mapped[str] = mapped_column() 
+    filmes = relationship('filme', secondary=filmes_generos, back_populates='generos') 
+
 
 class Filme(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     titulo: Mapped[str] = mapped_column()
-    genero: Mapped[str] = mapped_column()
     duracao: Mapped[str] = mapped_column()
+    generos: Mapped[List['Genero']] = relationship('Genero', secondary=filmes_generos, back_populates='filmes') 
 
     @classmethod
     def all(cls):
@@ -23,6 +39,7 @@ class Filme(db.Model):
     @classmethod
     def add_filme(cls, titulo, genero, duracao):
         filme = cls(titulo=titulo, genero=genero, duracao=duracao)
+        
         db.session.add(filme)
         db.session.commit()
 
@@ -57,4 +74,3 @@ class Sessao(db.Model):
         filme = cls.get(id)
         filme.filme_id = filme_id
         db.session.commit()
-

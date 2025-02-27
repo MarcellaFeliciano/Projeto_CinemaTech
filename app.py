@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, url_for, session
 
 from controllers import clientes, filmes, gerentes
 from models.cliente import Cliente
-from models.filme import Filme, Sessao
+from models.filme import Filme, Sessao, Genero
 from models.gerente import Gerente
 from flask_login import LoginManager
 
@@ -42,7 +42,21 @@ with app.app_context():
         novo_gerente = Gerente(email='admin@admin.com', senha='123')
         db.session.add(novo_gerente)
         db.session.commit()
-                                                                                  
+
+    count = Filme.query.count()
+    if count > 0:
+        print('já existem generos')
+    else:
+        g1 = Genero(nome='Ficção Científica')
+        g2 = Genero(nome='Ação')
+        g3 = Genero(nome='Romance')
+        g4 = Genero(nome='Comedia')
+        g5 = Genero(nome='Terror')
+
+        db.session.add_all([g1,g2,g3,g4,g5])
+        db.session.commit()
+
+
 app.register_blueprint(clientes.bp)
 app.register_blueprint(filmes.bp)
 app.register_blueprint(gerentes.bp)
