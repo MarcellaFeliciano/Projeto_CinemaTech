@@ -1,84 +1,49 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Cadastro de Filmes</title>
-    <link rel="stylesheet" href="../static/style.css">
-</head>
-<body>
-
-    <div class="container">
-        <div class="header">
-            <div class="menu">
-                <h2>CINETECH</h2>
-                <div class="opcoes">
-                    <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
-                    <a href="{{ url_for('filmes.index')}}"><button>Lançamento</button></a>
-                    <a href="{{ url_for('filmes.index')}}"><button>Avaliações</button></a>
-                    <a href="{{ url_for('filmes.index')}}"><button>Programação</button></a>
-                    <a href="{{ url_for('filmes.index')}}"><button>Reserva</button></a>
-                    {% if user: %}
-                    <a href="{{ url_for('clientes.logout')}}"><button>Logout</button></a>
-                    {% elif gerente: %}
-                    <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
-                    {% else %}
-                    <a href="{{ url_for('clientes.login_cliente')}}"><button>Login</button></a>
-                    {% endif %}
-
-                </div>
-            </div>
-            <div class="deadpool"></div>
-        </div>
-        <div class="main">
-            <div class="procurador">
-                <div class="filtros">
-                    <select name="categoria" id="categoria" required>
-                        <option value="" disabled selected>Gênero</option>
-                        <option value="Eletrodoméstico">A</option>
-                        <option value="Eletrodoméstico">B</option>
-                    </select>
-                    <select name="categoria" id="categoria" required>
-                        <option value="" disabled selected>Lançamento</option>
-                        <option value="Eletrodoméstico">A</option>
-                        <option value="Eletrodoméstico">B</option>
-                    </select>
-                    <select name="categoria" id="categoria" required>
-                        <option value="" disabled selected>Avalição</option>
-                        <option value="Eletrodoméstico">A</option>
-                        <option value="Eletrodoméstico">B</option>
-                    </select>
-                </div>
-            </div>
-            <br>
-            <div class="conteudo">
-                <div class="filme">
-                    <h3>FILME 1</h3>
-                </div>
-                <div class="filme">
-                    <h3>FILME 2</h3>
-                </div>
-                <div class="filme">
-                    <h3>FILME 3</h3>
-                </div>
-                <div class="filme">
-                    <h3>FILME 4</h3>
-                </div>
-                <div class="filme">
-                    <h3>FILME 5</h3>
-                </div>
-                <div class="filme">
-                    <h3>FILME 6</h3>
-                </div>
-                <div class="filme">
-                    <h3>FILME 7</h3>
-                </div>
-                <div class="filme">
-                    <h3>FILME 8</h3>
-                </div>
+{% extends 'base.html' %}
+    {% block section %}
+        <div class="procurador">
+            <div class="filtros">
+                <select name="categoria" id="categoria" required>
+                    <option value="" disabled selected>Gênero</option>
+                    <option value="Eletrodoméstico">A</option>
+                    <option value="Eletrodoméstico">B</option>
+                </select>
+                <select name="categoria" id="categoria" required>
+                    <option value="" disabled selected>Lançamento</option>
+                    <option value="Eletrodoméstico">A</option>
+                    <option value="Eletrodoméstico">B</option>
+                </select>
+                <select name="categoria" id="categoria" required>
+                    <option value="" disabled selected>Avalição</option>
+                    <option value="Eletrodoméstico">A</option>
+                    <option value="Eletrodoméstico">B</option>
+                </select>
             </div>
         </div>
-    </div>
-
-</body>
-</html>
+        <br>
+        <div class="conteudo">
+            <div class="filme">
+                <h3>FILME 1</h3>
+            </div>
+            <div class="filme">
+                <h3>FILME 2</h3>
+            </div>
+            <div class="filme">
+                <h3>FILME 3</h3>
+            </div>
+            <div class="filme">
+                <h3>FILME 4</h3>
+            </div>
+            <div class="filme">
+                <h3>FILME 5</h3>
+            </div>
+            <div class="filme">
+                <h3>FILME 6</h3>
+            </div>
+            <div class="filme">
+                <h3>FILME 7</h3>
+            </div>
+            <div class="filme">
+                <h3>FILME 8</h3>
+            </div>
+        </div>
+    {% endblock %}

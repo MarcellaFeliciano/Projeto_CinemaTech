@@ -4,34 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Cadastro de Filmes</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
     <div class="container"> 
-
-        <aside>
-            <h1> CINETECH</h1>
-            <a href="{{ url_for('filmes.index')}}">Filmes</a>
-            <a href="{{ url_for('filmes.index')}}">Lançamento</a>
-            <a href="{{ url_for('filmes.index')}}">Avaliações</a>
-            <a href="{{ url_for('filmes.index')}}">Programação</a>
-            <a href="{{ url_for('filmes.index')}}">Reserva</a>
-
-            {%if gerente: %}
-            <a href="{{ url_for('filmes.add_filme')}}">Adicionar Filme</a>
-            <a href="{{ url_for('filmes.add_sessao')}}">Adicionar Sessão</a>
-            {% endif %}
-
-            {% if user: %}
-            <a href="{{ url_for('clientes.logout')}}">Logout</a>
-            {% elif gerente: %}
-            <a href="{{ url_for('gerentes.logout')}}">Logout</a>
-            {% else %}
-            <a href="{{ url_for('clientes.login_cliente')}}">Login</a>
-            {% endif %}
-
-        </aside>
-        <main>
-
+        <div class="header">
+            <div class="menu">
+                <h1> CINETECH</h1>
+                <a href="{{ url_for('filmes.index')}}">Filmes</a>
+                <a href="{{ url_for('filmes.index')}}">Lançamento</a>
+                <a href="{{ url_for('filmes.index')}}">Avaliações</a>
+                <a href="{{ url_for('filmes.index')}}">Programação</a>
+                <a href="{{ url_for('filmes.index')}}">Reserva</a>
+    
+                {%if gerente: %}
+                <a href="{{ url_for('filmes.add_filme')}}">Adicionar Filme</a>
+                <a href="{{ url_for('filmes.add_sessao')}}">Adicionar Sessão</a>
+                {% endif %}
+    
+                {% if user: %}
+                <a href="{{ url_for('clientes.logout')}}">Logout</a>
+                {% elif gerente: %}
+                <a href="{{ url_for('gerentes.logout')}}">Logout</a>
+                {% else %}
+                <a href="{{ url_for('clientes.login_cliente')}}">Login</a>
+                {% endif %}
+    
+            </div>
+        </div>
+        
+        <div class="main">
             <h2>Filmes Cadastrados</h2>
             <ul>
                 {% for filme in filmes %}
@@ -45,8 +47,8 @@
                     <li>{{ sessao.filme_id }} - {{ sessao.horario }}</li>
                 {% endfor %}
             </ul>
+        </div>
 
-        </main>
     </div>
 </body>
 </html>
