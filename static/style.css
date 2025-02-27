@@ -16,7 +16,7 @@ body {
 .header {
     width: 100vw;
     height: 65vh;
-    background-color: cadetblue;
+    background-color: black;
     padding: 20px;
 }
 .menu {
@@ -45,7 +45,7 @@ body {
 .main {
     width: 100vw;
     height: 150vh;
-    background-color: chocolate;
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,18 +53,17 @@ body {
 .procurador {
     width: 95vw;
     height: 38px;
-    background-color: crimson;
     margin: 15px;
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 10px;
     justify-content: space-between;
+
 }
 .conteudo {
     width: 95vw;
     height: 130vh;
-    background-color: darkolivegreen;
     padding: 10px;
     display: flex;
     flex-direction: column;
