@@ -15,6 +15,7 @@ login_manager = LoginManager()
 def load_user(user_id):
     return db.get(Cliente, user_id)
 """
+
 login_manager = LoginManager()
 @login_manager.user_loader #Carregador padrão do flask_login, isso é obrigatório
 def load_user(user_id):
@@ -22,6 +23,8 @@ def load_user(user_id):
     #Esse função find está sendo definida la na linha 31, caso mude o nome la, tem que mudar aqui também
 
 app.config['SECRET_KEY'] = 'muitodificil'
+app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Limite de 16 MB
 
 # Inicializa o controle de sessões
 login_manager.init_app(app)

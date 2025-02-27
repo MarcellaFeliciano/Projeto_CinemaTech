@@ -1,46 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <div class="menu">
-                <h2>CINETECH</h2>
-                <div class="opcoes">
-                    <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
-                    <a href="{{ url_for('filmes.index')}}"><button>Lançamento</button></a>
-                    <a href="{{ url_for('filmes.index')}}"><button>Avaliações</button></a>
-                    <a href="{{ url_for('filmes.index')}}"><button>Programação</button></a>
-                    <a href="{{ url_for('filmes.index')}}"><button>Reserva</button></a>
-                    {% if user: %}
-                    <a href="{{ url_for('clientes.logout')}}"><button>Logout</button></a>
-                    {% elif gerente: %}
-                    <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
-                    {% else %}
-                    <a href="{{ url_for('clientes.login_cliente')}}"><button>Login</button></a>
-                    {% endif %}
-                </div>
-            </div>
+{% extends 'base.html' %}
+    {% block header %}
+            {% if user: %}
+            <a href="{{ url_for('clientes.logout')}}"><button>Logout</button></a>
+            {% elif gerente: %}
+            <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
+            {% else %}
+            <a href="{{ url_for('clientes.login_cliente')}}"><button>Login</button></a>
+            {% endif %}
+    {% endblock %}
+    {% block aside %}
+        <div class='intro_clientes'>
+            <h3 style="color: white;">Bem Vindo ao CINETECH {{user}}</h3>
         </div>
-        <main>
-            <div class='intro_clientes'>
-                <h3>Bem Vindo ao CINETECH {{user}}</h3>
-            </div>
-
-            <section>
-                <div>
-                    <h4>Suas reservas</h4>
-                </div>
-                <div>
-                    <h4>Suas avaliações</h4>
-                </div>
-            </section>
-
-        </main>
-
+    {% endblock %}
+    {% block section %}
+        <div>
+            <h4>Suas reservas</h4>
+        </div>
+        <div>
+            <h4>Suas avaliações</h4>
+        </div>
+    {% endblock%}
 </body>
 </html>

@@ -9,6 +9,7 @@ body {
     display: flex;
     background: rgba(121, 118, 118, 0);
     justify-content: center;
+    align-items: center;
     margin-top: 20px;
 }
 .caixa {
