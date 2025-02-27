@@ -13,6 +13,7 @@ filmes_generos = Table(
     Column('generos_id', ForeignKey('genero.id'), primary_key=True)
 )
 
+
 class Genero(db.Model):
     __tablename__ = 'genero'  # Adicionando o nome da tabela
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -45,10 +46,13 @@ class Filme(db.Model):
     @classmethod
     def add_filme(cls, titulo, genero, duracao):
         filme = cls(titulo=titulo, duracao=duracao)
-    
+        db.session.add(filme)
+        db.session.commit()
+
+        filme = session.query(Filme).filter_by(titulo='Nome do Filme').first()
         # Associe o filme ao gênero
         filme.generos.append(genero)
-        db.session.add(filme)
+
         db.session.commit()
 
     @classmethod

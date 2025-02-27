@@ -30,10 +30,11 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Limite de 16 MB
 login_manager.init_app(app)
 
 
-
 # configure the SQLite database, relative to the app instance folder
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 # initialize the app with the extension
+
+
 db.init_app(app)
 with app.app_context():
     db.create_all()     
@@ -46,18 +47,31 @@ with app.app_context():
         db.session.add(novo_gerente)
         db.session.commit()
 
-    count = int(Filme.query.count())
+    count = Filme.query.count()
     if count == 0:
-        g1 = Genero(nome='Ficção Científica')
-        g2 = Genero(nome='Ação')
-        g3 = Genero(nome='Romance')
-        g4 = Genero(nome='Comedia')
-        g5 = Genero(nome='Terror')
+        # Verificar se os gêneros já existem
+        generos_existentes = Genero.query.all()
+        generos_nomes = {g.nome for g in generos_existentes}  # Conjunto com os nomes dos gêneros existentes
 
-        db.session.add_all([g1,g2,g3,g4,g5])
-        db.session.commit()
-    else:
-        print('já existem generos')
+        # Criar novos gêneros apenas se não existirem
+        novos_generos = [
+            Genero(nome='Ficção Científica'),
+            Genero(nome='Ação'),
+            Genero(nome='Romance'),
+            Genero(nome='Comedia'),
+            Genero(nome='Terror')
+        ]
+        
+        for genero in novos_generos:
+            if genero.nome not in generos_nomes:
+                db.session.add(genero)
+
+        # Comitar apenas se novos gêneros foram adicionados
+        if db.session.new:
+            db.session.commit()
+
+
+
 
 
 app.register_blueprint(clientes.bp)
