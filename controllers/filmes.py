@@ -22,10 +22,11 @@ def add_filme():
         titulo = request.form['titulo']
         genero = request.form['genero']
         duracao = request.form['duracao']
-        if titulo and genero:
-            Filme.add_filme(titulo=titulo, genero=genero, duracao=duracao)
-            #filmes.append({'titulo': titulo, 'genero': genero})
+        Filme.add_filme(titulo=titulo, genero=genero, duracao=duracao)
         return redirect(url_for('filmes.index'))
+
+    else:
+        return render_template('filmes/cadastrar_filme.html', filmes = Filme.all(), sessoes = Sessao.all())
 
 @bp.route('/add_sessao', methods=['POST','GET'])
 def add_sessao():
@@ -38,3 +39,7 @@ def add_sessao():
             Sessao.add_sessao(filme_id=filme, horario=horario, sala=sala)
             #sessoes.append({'filme': filme, 'horario': horario})
         return redirect(url_for('filmes.index'))
+    
+    else:
+        return render_template('filmes/cadastrar_sessao.html', filmes = Filme.all(), sessoes = Sessao.all())
+
