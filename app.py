@@ -5,7 +5,7 @@ from models.cliente import Cliente
 from models.filme import Filme, Sessao, Genero
 from models.gerente import Gerente
 from flask_login import LoginManager
-
+import os
 from database import db
 
 app = Flask(__name__)
@@ -23,7 +23,7 @@ def load_user(user_id):
     #Esse função find está sendo definida la na linha 31, caso mude o nome la, tem que mudar aqui também
 
 app.config['SECRET_KEY'] = 'muitodificil'
-app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static/uploads')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Limite de 16 MB
 
 # Inicializa o controle de sessões

@@ -14,15 +14,22 @@
         {% endif %}
 
         <div class="main" style="background-color: aqua;">
-            <h2>Filmes Cadastrados</h2>
-            <ul>
+
+
+            <div class="filmes-container">
                 {% for filme in filmes %}
-                    <li>
-                        {{ filme.titulo }} 
-                        - {{ filme.generos | map(attribute='nome') | join(', ') }}
-                    </li>
+                    <div class="filme-card">
+                        <img src="{{ url_for('static', filename='uploads/' + filme.imagem) }}" alt="Imagem de {{ filme.titulo }}" class="filme-imagem">
+                        <h3>{{ filme.titulo }}</h3>
+                        <p><strong>Data de Lançamento:</strong> {{ filme.data_lancamento }}</p>
+                        <p><strong>Classificação:</strong> {{ filme.classificacao }}</p>
+                        <p><strong>Duração:</strong> {{ filme.duracao }}</p>
+                        <p><strong>Sinopse:</strong> {{ filme.sinopse }}</p>
+                        <p><strong>Gêneros:</strong> {{ filme.generos | map(attribute='nome') | join(', ') }}</p>
+                    </div>
                 {% endfor %}
-            </ul>
+            </div>
+           
 
             <h2>Sessões Criadas</h2>
             <ul>

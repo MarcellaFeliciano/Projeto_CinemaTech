@@ -23,32 +23,41 @@ def index():
     
     return render_template('filmes/index.html', filmes = Filme.all(), sessoes = Sessao.all())
   
-
 @bp.route('/add_filme', methods=['POST', 'GET'])
 def add_filme():
     if request.method == 'POST':
         titulo = request.form['titulo']
         generos = request.form.getlist('generos')
         duracao = request.form['duracao']
+        sinopse = request.form['sinopse']
+        classificacao = request.form['classificacao']
+        data_lancamento = request.form['data_lancamento']
         
-        # Processar o upload da imagem
-        """
-        file = request.files.get('imagem')
+       # Processar o upload da imagem
+        file = request.files.get('file')
+        filename = None  # Inicializa filename como None
+
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            upload_folder = current_app.config['UPLOAD_FOLDER']  # Use current_app para acessar a configuração
-            file.save(os.path.join(upload_folder, filename))
-            # Você pode salvar o caminho da imagem no banco de dados, se necessário.
-            # Exemplo: Filme.add_filme(titulo=titulo, genero=genero, duracao=duracao, imagem=filename)
-        
-        """
+            upload_folder = current_app.config['UPLOAD_FOLDER']
+            
+            # Verifica se o diretório de uploads existe, caso contrário, cria
+            if not os.path.exists(upload_folder):
+                os.makedirs(upload_folder)
 
-        Filme.add_filme(titulo=titulo, generos=generos, duracao=duracao)
+            file.save(os.path.join(upload_folder, filename))
+        
+        # Adicionar o filme ao banco de dados
+        Filme.add_filme(titulo=titulo, data_lancamento=data_lancamento, classificacao=classificacao,
+                        sinopse=sinopse, generos=generos, duracao=duracao, imagem=filename)
+        
         flash('Filme adicionado com sucesso!')
         return redirect(url_for('filmes.index'))
 
     else:
         return render_template('filmes/cadastrar_filme.html', filmes=Filme.all(), sessoes=Sessao.all(), generos=Genero.all())
+
+
 
 @bp.route('/add_sessao', methods=['POST','GET'])
 def add_sessao():

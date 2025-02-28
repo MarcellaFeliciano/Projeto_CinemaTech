@@ -87,3 +87,43 @@ section {
     align-items: center;
     justify-content: center;
 }
+
+
+/* CSS DO CHAT - PARA MOSTRAR OS FILMES - A FIM DE TESTES - */
+
+.filmes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.filme-card {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 250px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.filme-card:hover {
+    transform: scale(1.05);
+}
+
+.filme-imagem {
+    width: 100%;
+    height: auto;
+}
+
+.filme-card h3 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.filme-card p {
+    margin: 5px 10px;
+    font-size: 0.9em;
+}

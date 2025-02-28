@@ -6,11 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-
     <h2>Cadastro de Filmes</h2>
-    <form action="{{ url_for('filmes.add_filme') }}" method="POST">
+    <form action="{{ url_for('filmes.add_filme') }}" method="POST" enctype="multipart/form-data">
         <label for="titulo">Título do Filme:</label>
         <input type="text" name="titulo" required>
+
+        <label for="sinopse">Sinopse:</label>
+        <input type="text" name="sinopse" required>
 
         <label for="genero">Gênero:</label>
         {% for genero in generos %}
@@ -21,7 +23,16 @@
         {% endfor %}
 
         <label for="duracao">Duração:</label>
-        <input type="text" name="duracao" required>
+        <input type="text" name="duracao" required placeholder="Ex: 2h 30m">
+
+        <label for="classificacao">Classificação Indicativa:</label>
+        <input type="number" name="classificacao" required>
+
+        <label for="data_lancamento">Data de Lançamento:</label>
+        <input type="date" name="data_lancamento" required>
+
+        <h1>Carregar Imagem/Banner do Filme</h1>
+        <input type="file" name="file" required>
 
         <button type="submit">Adicionar Filme</button>
     </form>

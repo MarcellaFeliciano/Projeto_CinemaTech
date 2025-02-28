@@ -33,6 +33,10 @@ class Filme(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     titulo: Mapped[str] = mapped_column(nullable=False)  # Adicionando nullable=False
     duracao: Mapped[str] = mapped_column(nullable=False)  # Adicionando nullable=False
+    sinopse: Mapped[str] = mapped_column(nullable=False)
+    classificacao: Mapped[int] = mapped_column(nullable=False)
+    data_lancamento: Mapped[str] = mapped_column(nullable=False)
+    imagem: Mapped[str] = mapped_column(nullable=False)
 
     # Relação com Genero
     generos: Mapped[List[Genero]] = relationship('Genero', secondary=filmes_generos, back_populates='filmes')
@@ -50,8 +54,8 @@ class Filme(db.Model):
         return cls.query.filter_by(titulo=titulo).first()
 
     @classmethod
-    def add_filme(cls, titulo, generos, duracao):
-        filme = cls(titulo=titulo, duracao=duracao)
+    def add_filme(cls, titulo, generos, duracao, sinopse, classificacao, data_lancamento, imagem):
+        filme = cls(titulo=titulo, duracao=duracao, sinopse=sinopse, classificacao=classificacao, data_lancamento=data_lancamento, imagem=imagem)
         db.session.add(filme)
         db.session.commit()
 
