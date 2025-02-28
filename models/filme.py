@@ -20,7 +20,13 @@ class Genero(db.Model):
     nome: Mapped[str] = mapped_column(nullable=False)  # Adicionando nullable=False
 
     # Relação com Filme
-    filmes: Mapped[List['Filme']] = relationship('Filme', secondary=filmes_generos, back_populates='generos')
+    #filmes: Mapped[List['Filme']] = relationship('Filme', secondary=filmes_generos, back_populates='generos')
+    filmes = relationship('Filme', secondary=filmes_generos, back_populates='generos') # lista os alunos vinculados ao curso
+
+    @classmethod
+    def all(cls):
+        return db.session.query(cls).all()
+
 
 class Filme(db.Model):
     __tablename__ = 'filme'  # Adicionando o nome da tabela
@@ -30,7 +36,7 @@ class Filme(db.Model):
 
     # Relação com Genero
     generos: Mapped[List[Genero]] = relationship('Genero', secondary=filmes_generos, back_populates='filmes')
-    
+
     @classmethod
     def all(cls):
         return db.session.query(cls).all()
@@ -44,14 +50,17 @@ class Filme(db.Model):
         return cls.query.filter_by(titulo=titulo).first()
 
     @classmethod
-    def add_filme(cls, titulo, genero, duracao):
+    def add_filme(cls, titulo, generos, duracao):
         filme = cls(titulo=titulo, duracao=duracao)
         db.session.add(filme)
         db.session.commit()
 
-        filme = session.query(Filme).filter_by(titulo='Nome do Filme').first()
+        filme = db.session.query(cls).filter_by(titulo=titulo).first()
         # Associe o filme ao gênero
-        filme.generos.append(genero)
+        for nome in generos:
+            genero = db.session.query(Genero).filter_by(nome=nome).first()
+            if genero:
+                genero.filmes.append(filme)
 
         db.session.commit()
 
@@ -61,9 +70,10 @@ class Filme(db.Model):
         filme.titulo = titulo
         db.session.commit()
 
+
 class Sessao(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    filme_id: Mapped[str] = mapped_column() # adicionar chave estrangeira
+    filme_id: Mapped[int] = mapped_column(ForeignKey('filme.id'), nullable=False)
     horario: Mapped[str] = mapped_column()
     sala: Mapped[str] = mapped_column()
 

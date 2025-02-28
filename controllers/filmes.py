@@ -1,5 +1,5 @@
 from flask import render_template, Blueprint, url_for, request, flash, redirect, session, current_app
-from models.filme import Filme, Sessao
+from models.filme import Filme, Sessao, Genero
 from werkzeug.utils import secure_filename
 import os
 
@@ -28,10 +28,11 @@ def index():
 def add_filme():
     if request.method == 'POST':
         titulo = request.form['titulo']
-        genero = request.form['genero']
+        generos = request.form.getlist('generos')
         duracao = request.form['duracao']
         
         # Processar o upload da imagem
+        """
         file = request.files.get('imagem')
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -40,12 +41,14 @@ def add_filme():
             # Você pode salvar o caminho da imagem no banco de dados, se necessário.
             # Exemplo: Filme.add_filme(titulo=titulo, genero=genero, duracao=duracao, imagem=filename)
         
-        Filme.add_filme(titulo=titulo, genero=genero, duracao=duracao)
+        """
+
+        Filme.add_filme(titulo=titulo, generos=generos, duracao=duracao)
         flash('Filme adicionado com sucesso!')
         return redirect(url_for('filmes.index'))
 
     else:
-        return render_template('filmes/cadastrar_filme.html', filmes=Filme.all(), sessoes=Sessao.all())
+        return render_template('filmes/cadastrar_filme.html', filmes=Filme.all(), sessoes=Sessao.all(), generos=Genero.all())
 
 @bp.route('/add_sessao', methods=['POST','GET'])
 def add_sessao():

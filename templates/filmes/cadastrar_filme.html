@@ -6,23 +6,23 @@
     <title>Document</title>
 </head>
 <body>
-    
+
     <h2>Cadastro de Filmes</h2>
     <form action="{{ url_for('filmes.add_filme') }}" method="POST">
         <label for="titulo">Título do Filme:</label>
         <input type="text" name="titulo" required>
-        
+
         <label for="genero">Gênero:</label>
-        <input type="text" name="genero" required>
-        
+        {% for genero in generos %}
+            <div>
+                <input type="checkbox" name="generos" value="{{ genero.nome }}" id="{{ genero.nome }}">
+                <label for="{{ genero.nome }}">{{ genero.nome }}</label>
+            </div>
+        {% endfor %}
+
         <label for="duracao">Duração:</label>
         <input type="text" name="duracao" required>
 
-        <h1>Carregar Imagem</h1>
-        <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="file" required>
-        </form>
-        
         <button type="submit">Adicionar Filme</button>
     </form>
 </body>
