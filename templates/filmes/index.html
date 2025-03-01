@@ -39,26 +39,74 @@
         </div>
         {% endif %}
     </header>
-    <section>
-        <div class="filmes-container">
-            {% for filme in filmes %}
-                <div class="filme-card">
-                    <img src="{{ url_for('static', filename='uploads/' + filme.imagem) }}" alt="Imagem de {{ filme.titulo }}" class="filme-imagem">
-                    <h3>{{ filme.titulo }}</h3>
-                    <p><strong>Data de Lançamento:</strong> {{ filme.data_lancamento }}</p>
-                    <p><strong>Classificação:</strong> {{ filme.classificacao }}</p>
-                    <p><strong>Duração:</strong> {{ filme.duracao }}</p>
-                    <p><strong>Sinopse:</strong> {{ filme.sinopse }}</p>
-                    <p><strong>Gêneros:</strong> {{ filme.generos | map(attribute='nome') | join(', ') }}</p>
-                
-                    <a href="{{ url_for('filmes.editar_filme', id=filme.id) }}">Editar</a>
-                    <a href="{{ url_for('filmes.excluir_filme', id=filme.id) }}" onclick="return confirm('Tem certeza que deseja deletar esta atividade?');">Deletar</a>
-                    <a href="{{ url_for('filmes.ver_sessoes', id=filme.id) }}" >Sessões Disponíveis</a>
 
-                </div>
+    <aside class="aside_filmes">
+        <h2>Filmes mais Populares</h2>
+        <div class="conteudo">
+            {% for filme in filmes[:4] %}  <!-- Limita a quatro filmes -->
+                <div class="filme">
+                    <img src="{{ url_for('static', filename='uploads/' + filme.imagem) }}" alt="Imagem de {{ filme.titulo }}" class="filme-imagem">
+                    <div>
+                        <h2>{{ filme.titulo }}</h2>
+                        <p><strong>Data de Lançamento:</strong> {{ filme.data_lancamento }}</p>
+                        <p><strong>Classificação:</strong> {{ filme.classificacao }}</p>
+                        <p><strong>Duração:</strong> {{ filme.duracao }}</p>
+                        <p><strong>Sinopse:</strong> {{ filme.sinopse }}</p>
+                        <p><strong>Gêneros:</strong> {{ filme.generos | map(attribute='nome') | join(', ') }}</p>
+                        <a href="{{ url_for('filmes.ver_sessoes', id=filme.id) }}">Sessões Disponíveis</a>
+
+                    </div>
+                   </div>
             {% endfor %}
         </div>
+        <button class="botao esquerda bt_car_filmes" onclick="mover(-1)">&#10094;</button>
+        <button class="botao direita bt_car_filmes" onclick="mover(1)">&#10095;</button>
+    </aside>
+    <section class="section_filmes">
+        <h1>Filmes Disponíveis</h1>
+        <div class="box_filmes">
+            <div class="filmes-container">
+                {% for filme in filmes %}
+                    <div class="filme-card">
+                        <img src="{{ url_for('static', filename='uploads/' + filme.imagem) }}" alt="Imagem de {{ filme.titulo }}" class="filme-imagem">
+                        <h3>{{ filme.titulo }}</h3>
+                        <p><strong>Data de Lançamento:</strong> {{ filme.data_lancamento }}</p>
+                        <p><strong>Classificação:</strong> {{ filme.classificacao }}</p>
+                        <p><strong>Duração:</strong> {{ filme.duracao }}</p>
+                        <p><strong>Sinopse:</strong> {{ filme.sinopse }}</p>
+                        <p><strong>Gêneros:</strong> {{ filme.generos | map(attribute='nome') | join(', ') }}</p>
+                    
+                        <a href="{{ url_for('filmes.editar_filme', id=filme.id) }}">Editar</a>
+                        <a href="{{ url_for('filmes.excluir_filme', id=filme.id) }}" onclick="return confirm('Tem certeza que deseja deletar esta atividade?');">Deletar</a>
+                        <a href="{{ url_for('filmes.ver_sessoes', id=filme.id) }}" >Sessões Disponíveis</a>
+    
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </section>
+    <script>
+    let index = 0; // Índice do filme atual
+    const filmes = document.querySelectorAll('.filme');
+    const totalFilmes = filmes.length;
+
+    function mover(direcao) {
+        index += direcao;
+        if (index < 0) {
+            index = totalFilmes - 1; // Volta para o último filme
+        } else if (index >= totalFilmes) {
+            index = 0; // Volta para o primeiro filme
+        }
+        atualizarCarrossel();
+    }
+
+    function atualizarCarrossel() {
+        const transformacao = `translateX(-${index * 100}%)`;
+        filmes.forEach(filme => {
+            filme.style.transform = transformacao; // Aplica a transformação
+        });
+    }
+</script>
 
 
 </body>
