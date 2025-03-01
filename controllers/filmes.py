@@ -91,3 +91,28 @@ def excluir_filme(id):
 
     return render_template('filmes/sessoes.html', sessoes = Sessao.filter_by_id(filme_id=id))
     
+
+@bp.route('/reserva', methods=['POST','GET'])
+def reserva():
+
+    return render_template('filmes/reserva.html', sessoes = Sessao.all())
+    
+
+"""
+
+@bp.route('/reservar', methods=['POST','GET'])
+def reservar():
+    if request.method == 'POST':
+        data = request.get_json()
+        user_id = data['user_id']
+        session_id = data['session_id']
+        seats = ','.join(data['seats'])  # Converte a lista de assentos em uma string
+
+        new_reserva = Reserva(sessao_id=session_id, cliente_id=user_id, assentos_reservados=seats)
+        db.session.add(new_reserva)
+        db.session.commit()
+
+        return jsonify(success=True)
+    
+
+"""
