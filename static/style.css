@@ -39,6 +39,12 @@ header {
 aside {
     width: 100vw;
     height: 60vh;
+    background: black;
+    padding: 10px;
+}
+.aside_index {
+    width: 100vw;
+    height: 50vh;
     background-color: black;
     padding: 10px;
 }
@@ -51,18 +57,71 @@ aside {
 .opcoes a {
     margin: 5px;
 }
+
 .deadpool {
-    width: 20vw;
-    height: 53vh;
-    margin: 10px;
-    background-image: url('imgs/deadpoolandwolverine.png');
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: center;
+    display: flex; /* Usar flexbox para layout lado a lado */
+    background-color: black; /* Cor de fundo */
+    color: #fff; /* Cor do texto */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Largura total */
+    height:100%; /* Largura máxima */
+    margin: auto; /* Centralizar a div */
 }
-section {
+.deadpool img {
+    width: 20%; /* largura da imagem */
+    padding: 5px;
+    border-radius: 8px; /* Bordas arredondadas para a imagem */
+}
+.deadpool div {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    gap: 10px;
+    padding-left: 20px; /* Espaço entre a imagem e o texto */
+}
+.deadpool h2 {
+    margin: 0 0 10px;
+}
+.deadpool p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.deadpool_bt_login {
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    
+
+}
+.deadpool_bt_login button {
+    width: 200px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+
+
+}
+.deadpool_bt_login button a {
+    color: black;
+    font-weight: bolder;
+}
+section{
+    height: auto;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+} 
+.section_index {
     width: 100vw;
-    height: 150vh;
+    height: 50vh;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -70,7 +129,7 @@ section {
 }
 .procurador {
     width: 95vw;
-    height: 38px;
+    height: 10%;
     margin: 15px;
     display: flex;
     flex-direction: row;
@@ -79,25 +138,74 @@ section {
     justify-content: space-between;
 
 }
+.procurador .filtros select{
+    text-align: center;
+    width: 120px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+}
+
+/* CSS PARA FAZER CARROSSEL*/
 .conteudo {
-    width: 95vw;
-    height: 130vh;
-    padding: 10px;
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    height: 80%; /* Largura máxima do carrossel */
+    margin: auto; /* Centralizar o carrossel */
+    position: relative;
 }
 .filme {
-    width: 22vw;
-    height: 55vh;
-    background-color: darkslateblue;
-    margin: 10px;
+    min-width: 100%; /* Cada filme ocupa 100% da largura do carrossel */
+    transition: transform 0.5s ease; /* Transição suave */
+    background-color: white; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
     display: flex;
-    align-items: center;
+    flex-direction: row;
     justify-content: center;
+    
 }
+
+.filme img {
+    margin-left: 90px;
+    width: 20%;
+    height: 95%;
+}
+.filme div {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 90%;
+    padding: 20px;
+    margin:10px;
+    margin-left: 20px;
+    gap:10px;
+    border: 1px solid white;
+    background-color: black;
+
+}
+.botao {
+    position: absolute;
+    top: 90%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.botao.esquerda {
+    left: 10px;
+}
+.botao.direita {
+    right: 10px;
+}
+
 
 
 /* CSS DO CHAT - PARA MOSTRAR OS FILMES - A FIM DE TESTES - */
