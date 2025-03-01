@@ -1,0 +1,78 @@
+/* Estilo geral */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Cabeçalho */
+h2 {
+    font-size: 28px;
+    margin-top: 20px;
+    color: #e50914; /* Vermelho Netflix */
+}
+
+/* Formulário */
+form {
+    background-color: #1c1c1c;
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+input[type="text"], input[type="number"], input[type="date"], input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Botão de envio */
+button {
+    background-color: #e50914;
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: block;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #ff1e28;
+}
+
+/* Estilização das opções de gênero */
+div {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    form {
+        width: 80%;
+    }
+}

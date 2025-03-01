@@ -1,0 +1,81 @@
+/* Estilo geral */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle, #1a1a1a, #000000);
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Cabeçalho */
+h2 {
+    font-size: 28px;
+    margin-top: 20px;
+    color: #ff0000; /* Branco puro para um visual mais clean */
+}
+
+/* Formulário */
+form {
+    background-color: #1c1c1c;
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Estilização dos labels */
+label {
+    display: block;
+    text-align: left;
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #ffffff; /* Agora os labels são brancos */
+}
+
+/* Estilização dos inputs e select */
+input[type="date"], input[type="time"], input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #ffffff; /* Agora a borda é branca */
+    transition: 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #ffffff;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    outline: none;
+}
+
+/* Botão de envio */
+button {
+    background-color: #e50914;
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: block;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #ff1e28;
+    transform: scale(1.05);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    form {
+        width: 80%;
+    }
+}
