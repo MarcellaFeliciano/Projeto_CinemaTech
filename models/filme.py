@@ -44,8 +44,11 @@ class Sessao(db.Model):
     
     @classmethod
     def all_order(cls):
-        return cls.query.join(Filme).order_by(Filme.titulo).all()
-
+        return cls.query.join(Filme).group_by(Filme.titulo).order_by(Filme.titulo).all()
+    
+    @classmethod
+    def filter_by_id(cls, filme_id):
+        return cls.query.filter(cls.filme_id == filme_id).order_by(cls.data, cls.horario).all()
     @classmethod
     def get(cls, id):
         return cls.query.get_or_404(id)

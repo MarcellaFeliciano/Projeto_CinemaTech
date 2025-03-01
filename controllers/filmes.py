@@ -74,3 +74,20 @@ def add_sessao():
     else:
         return render_template('filmes/cadastrar_sessao.html', filmes = Filme.all(), sessoes = Sessao.all())
 
+
+@bp.route('/sessoes/<int:id>', methods=['POST','GET'])
+def ver_sessoes(id):
+
+    return render_template('filmes/sessoes.html', sessoes = Sessao.filter_by_id(filme_id=id))
+    
+
+@bp.route('/editar_filme/<int:id>', methods=['POST','GET'])
+def editar_filme(id):
+
+    return render_template('filmes/sessoes.html', sessoes = Sessao.filter_by_id(filme_id=id))
+    
+@bp.route('/excluir_filme/<int:id>', methods=['POST','GET'])
+def excluir_filme(id):
+
+    return render_template('filmes/sessoes.html', sessoes = Sessao.filter_by_id(filme_id=id))
+    
