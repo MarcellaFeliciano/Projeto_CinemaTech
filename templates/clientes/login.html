@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Login</title>
-    <link rel="stylesheet" href="../../static/login_cliente.css">
+    <link rel="stylesheet" href="../../static/login.css">
 </head>
 <body>
     <div class="conteiner">
@@ -12,28 +12,20 @@
             <div class="box-1">
                 <div class="bem-vindo">
                     <div class="mensagem">
-                        <h1>Bem-vindo!</h1>
+                        
                     </div>
                 </div>
                 <div class="box-2">
-                    <div class="infeite-a"></div>
-                    <h1>Crie uma conta, <br> para ser notificado de todas as novidades.</h1>
+                    <h1>Login</h1>
                     <div class="login">
                         <input id="nome" placeholder="nome" autocomplete="off"><br>
                         <input id="email" placeholder="email" autocomplete="off"><br>
                         <input id="senha" placeholder="senha" autocomplete="off"><br>
-                        <div id="alertMessage" class="mensagem-alerta"></div>
 
-                        <div class="infeite-b">
-                            <div class="dados">
-                                <input type="checkbox" id="lembrarDados">
-                                <label for="lembrarDados">Lembrar meus dados</label>
-                            </div>
-                        </div>
-                        <button class="cadastro" onclick="registerUser()">CADASTRAR-SE</button>
+                        <button class="cadastro" onclick="registerUser()">Entrar</button>
                         <div class="sucessor">
-                            <p id="d">Esqueci minha <a>senha</a></p>
-                            <p id="d">Já tenho uma <a>conta</a></p>
+                            <p id="d">Ainda não tem uma conta? <a href="{{url_for('clientes.cadastrar_cliente')}}">Cadastre-se</a></p>
+                            <p id="d"><a href="{{url_for('gerentes.login_gerente')}}">Entrar como gerente</a></p>
                         </div>
                     </div>
                 </div>

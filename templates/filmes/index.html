@@ -4,59 +4,25 @@
         <a href="{{ url_for('filmes.add_filme')}}">Adicionar Filme</a>
         <a href="{{ url_for('filmes.add_sessao')}}">Adicionar Sessão</a>
         {% endif %}
+    {% endblock %}
 
-        {% if user: %}
-        <a href="{{ url_for('clientes.logout')}}">Logout</a>
-        {% elif gerente: %}
-        <a href="{{ url_for('gerentes.logout')}}">Logout</a>
-        {% else %}
-        <a href="{{ url_for('clientes.login_cliente')}}">Login</a>
-        {% endif %}
+    {% block section %}
+        <div class="filmes-container">
+            {% for filme in filmes %}
+                <div class="filme-card">
+                    <img src="{{ url_for('static', filename='uploads/' + filme.imagem) }}" alt="Imagem de {{ filme.titulo }}" class="filme-imagem">
+                    <h3>{{ filme.titulo }}</h3>
+                    <p><strong>Data de Lançamento:</strong> {{ filme.data_lancamento }}</p>
+                    <p><strong>Classificação:</strong> {{ filme.classificacao }}</p>
+                    <p><strong>Duração:</strong> {{ filme.duracao }}</p>
+                    <p><strong>Sinopse:</strong> {{ filme.sinopse }}</p>
+                    <p><strong>Gêneros:</strong> {{ filme.generos | map(attribute='nome') | join(', ') }}</p>
+                
+                    <a href="{{ url_for('filmes.editar_filme', id=filme.id) }}">Editar</a>
+                    <a href="{{ url_for('filmes.excluir_filme', id=filme.id) }}" onclick="return confirm('Tem certeza que deseja deletar esta atividade?');">Deletar</a>
+                    <a href="{{ url_for('filmes.ver_sessoes', id=filme.id) }}" >Sessões Disponíveis</a>
 
-        <div class="main" style="background-color: aqua;">
-
-
-            <div class="filmes-container">
-                {% for filme in filmes %}
-                    <div class="filme-card">
-                        <img src="{{ url_for('static', filename='uploads/' + filme.imagem) }}" alt="Imagem de {{ filme.titulo }}" class="filme-imagem">
-                        <h3>{{ filme.titulo }}</h3>
-                        <p><strong>Data de Lançamento:</strong> {{ filme.data_lancamento }}</p>
-                        <p><strong>Classificação:</strong> {{ filme.classificacao }}</p>
-                        <p><strong>Duração:</strong> {{ filme.duracao }}</p>
-                        <p><strong>Sinopse:</strong> {{ filme.sinopse }}</p>
-                        <p><strong>Gêneros:</strong> {{ filme.generos | map(attribute='nome') | join(', ') }}</p>
-                    
-                        <a href="{{ url_for('filmes.editar_filme', id=filme.id) }}">Editar</a>
-                        <a href="{{ url_for('filmes.excluir_filme', id=filme.id) }}" onclick="return confirm('Tem certeza que deseja deletar esta atividade?');">Deletar</a>
-                        <a href="{{ url_for('filmes.ver_sessoes', id=filme.id) }}" >Sessões Disponíveis</a>
-    
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="container">
-                <h1>Sessões Cadastradas</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Filme</th>
-                            <th>Data</th>
-                            <th>Horário</th>
-                            <th>Sala</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for sessao in sessoes %}
-                            <tr>
-                                <td>{{ sessao.filme.titulo }}</td>
-                                <td>{{ sessao.data }}</td>
-                                <td>{{ sessao.horario }}</td>
-                                <td>{{ sessao.sala }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-
+                </div>
+            {% endfor %}
         </div>
     {% endblock %}

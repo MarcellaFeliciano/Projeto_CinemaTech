@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Cadastro de Filmes</title>
+    {% block link %}
     <link rel="stylesheet" href="../static/style.css">
+    {% endblock %}
 </head>
 <body>
 
     <div class="container">
         <header>
             {% block header %}
-                <h2>CINETECH</h2>
+                <div class="logo"><img src="../static/imgs/logo.png" alt=""></div>
                 <div class="opcoes">
                     <a href="{{ url_for('index')}}"><button>Home</button></a>
                     <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
