@@ -1,49 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../../static/style.css">
+    <title>Admin - Cadastro de Filmes</title>
+    <link rel="stylesheet" href="../static/style.css">
+
 </head>
 <body>
-    
-    <header>
-        <div class="logo"><img src="../static/imgs/logo.png" alt=""></div>
-        <div class="opcoes">
-            <a href="{{ url_for('index')}}"><button>Home</button></a>
-            <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
-            <a href="{{ url_for('filmes.add_filme')}}"><button>Adicionar Filme</button></a>
-            <a href="{{ url_for('filmes.add_sessao')}}"><button>Adicionar Sessão</button></a>
-            <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
-        </div>
 
-    </header>
-
-    <aside>
-        <div class="deadpool"></div>
-    </aside>
-    <section>
-        <div class="procurador">
-            <div class="filtros">
-                <select name="categoria" id="categoria" required>
-                    <option value="" disabled selected>Gênero</option>
-                    <option value="Eletrodoméstico">A</option>
-                    <option value="Eletrodoméstico">B</option>
-                </select>
-                <select name="categoria" id="categoria" required>
-                    <option value="" disabled selected>Lançamento</option>
-                    <option value="Eletrodoméstico">A</option>
-                    <option value="Eletrodoméstico">B</option>
-                </select>
-                <select name="categoria" id="categoria" required>
-                    <option value="" disabled selected>Avalição</option>
-                    <option value="Eletrodoméstico">A</option>
-                    <option value="Eletrodoméstico">B</option>
-                </select>
+    <div class="container">
+        <header>
+            <div class="logo"><img src="../static/imgs/logo.png" alt=""></div>
+            <div class="opcoes">
+                <a href="{{ url_for('index')}}"><button>Home</button></a>
+                <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
+                <a href="{{ url_for('filmes.add_filme')}}"><button>Adicionar Filme</button></a>
+                <a href="{{ url_for('filmes.add_sessao')}}"><button>Adicionar Sessão</button></a>
+                <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
             </div>
-        </div>
-        <br>
-    </section>
+        </header>
+        
+        
+        <aside class="aside_index">
+        
+
+            <div class="deadpool">
+                <img src="/static/imgs/deadpoolandwolverine.png" alt="Deadpool"> <!-- Substitua pelo link da imagem -->
+                <div>
+                    <h2>Título: Deadpool</h2>
+                    <p><strong>Gêneros:</strong> Ação, Comédia, Ficção Científica</p>
+                    <p><strong>Sinopse:</strong> Um ex-militar que se torna um mercenário adquire poderes de cura e busca vingança contra aqueles que o torturaram.</p>
+                    <p><strong>Duração:</strong> 108 minutos</p>
+                    <p><strong>Classificação indicativa:</strong> 16 anos</p>
+                    <p><strong>Data de lançamento:</strong> 12 de fevereiro de 2016</p>
+                </div>
+                {% if not user:%}
+                <div class="deadpool_bt_login"> 
+                    <button>
+                        <a href="{{ url_for('clientes.login_cliente')}}">Para ter ACESSO a mais filmes CADASTRE-SE!</a>
+                    </button>
+                </div>
+                {% endif %}
+            </div>
+        </aside>
+        
+        <section class="section_index">
+            <div class="procurador">
+                <h2>Filmes Lançamentos</h2>
+                <div class="filtros">
+                    <select name="categoria" id="categoria" required>
+                        <option value="" disabled selected>Gênero</option>
+                        <option value="Eletrodoméstico">A</option>
+                        <option value="Eletrodoméstico">B</option>
+                    </select>
+                    <select name="categoria" id="categoria" required>
+                        <option value="" disabled selected>Lançamento</option>
+                        <option value="Eletrodoméstico">A</option>
+                        <option value="Eletrodoméstico">B</option>
+                    </select>
+                    <select name="categoria" id="categoria" required>
+                        <option value="" disabled selected>Avalição</option>
+                        <option value="Eletrodoméstico">A</option>
+                        <option value="Eletrodoméstico">B</option>
+                    </select>
+                </div>
+            </div>
+            <div class="conteudo">
+                {% for filme in filmes[:4] %}  <!-- Limita a quatro filmes -->
+                    <div class="filme">
+                        <img src="{{ url_for('static', filename='uploads/' + filme.imagem) }}" alt="Imagem de {{ filme.titulo }}" class="filme-imagem">
+                        <div>
+                            <h2>{{ filme.titulo }}</h2>
+                            <p><strong>Data de Lançamento:</strong> {{ filme.data_lancamento }}</p>
+                            <p><strong>Classificação:</strong> {{ filme.classificacao }}</p>
+                            <p><strong>Duração:</strong> {{ filme.duracao }}</p>
+                            <p><strong>Sinopse:</strong> {{ filme.sinopse }}</p>
+                            <p><strong>Gêneros:</strong> {{ filme.generos | map(attribute='nome') | join(', ') }}</p>
+                            <a href="{{ url_for('filmes.ver_sessoes', id=filme.id) }}">Sessões Disponíveis</a>
+    
+                        </div>
+                        </div>
+                {% endfor %}
+            </div>
+            <button class="botao esquerda" onclick="mover(-1)">&#10094;</button>
+            <button class="botao direita" onclick="mover(1)">&#10095;</button>
+            
+        </section>
+    </div>
+    <script>
+        let index = 0; // Índice do filme atual
+        const filmes = document.querySelectorAll('.filme');
+        const totalFilmes = filmes.length;
+    
+        function mover(direcao) {
+            index += direcao;
+            if (index < 0) {
+                index = totalFilmes - 1; // Volta para o último filme
+            } else if (index >= totalFilmes) {
+                index = 0; // Volta para o primeiro filme
+            }
+            atualizarCarrossel();
+        }
+    
+        function atualizarCarrossel() {
+            const transformacao = `translateX(-${index * 100}%)`;
+            filmes.forEach(filme => {
+                filme.style.transform = transformacao; // Aplica a transformação
+            });
+        }
+    </script>
 </body>
 </html>
+        
