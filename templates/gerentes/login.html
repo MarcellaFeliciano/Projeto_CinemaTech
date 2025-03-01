@@ -1,25 +1,41 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../../static/login.css">
 </head>
 <body>
+    <div class="conteiner">
+        <div class="caixa">
+            <div class="box-1">
+                <div class="bem-vindo">
+                    <div class="mensagem">
+                    </div>
+                </div>
+                <div class="box-2">
+                    <h1>Login de Gerente</h1>
+                    <div class="login">
+                        <form action="{{ url_for('gerentes.login_gerente') }}" method="post">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" placeholder="Email do admin" required>
+                            <label for="senha">Senha:</label>
+                            <input type="password" id="senha" name="senha" placeholder="Senha" required>
+                           
+                            <button class="cadastro" onclick="registerUser()">Entrar</button>
+                        </form>
+                    <div class="sucessor">
+                        <p id="d"><a href="{{url_for('clientes.login_cliente')}}">Logar como Cliente</a></p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
 
-    <div class="conteudo"></div>
-    <h3>Login de Gerente</h3>
-    <form action="{{ url_for('gerentes.login_gerente') }}" method="post">
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required>
-        
-        <button type="submit">Logar</button>
-
-        <a href="{{url_for('clientes.login_cliente')}}">Fazer login como cliente</a>
-     
-    </form>
 </body>
 </html>
+

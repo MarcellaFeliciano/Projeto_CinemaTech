@@ -1,12 +1,13 @@
 from flask import render_template, Blueprint, url_for, request, flash, redirect, session
 from models.gerente import Gerente
 
+from models.filme import Filme, Genero, Sessao
 
 bp = Blueprint('gerentes', __name__, url_prefix='/gerentes')
 
 @bp.route('/')
 def index():
-    return render_template('gerentes/index.html', gerentes = Gerente.all())
+    return render_template('gerentes/index.html', gerentes = Gerente.all(),  filmes = Filme.all(), sessoes = Sessao.all())
 
 @bp.route('/login_gerente', methods=['GET', 'POST'])
 def login_gerente():

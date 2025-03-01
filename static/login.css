@@ -47,6 +47,7 @@ body {
     color: rgb(255, 255, 255);
     justify-content: center;
     margin-bottom: 30px;
+    color: white;
 }
 .infeite-a {
     margin: 10px;
@@ -104,13 +105,17 @@ body {
     border: 2px solid rgb(70, 70, 70);
     border-radius: 5px;
     padding: 7px 45px;
-    background: rgba(97, 97, 97, 0.281);
+    background: rgba(237, 235, 235, 0.281);
 }
 
 form input {
     margin-bottom: 18px;
+
 }
 
+form label {
+    color: whitesmoke;
+}
 #nome {
     background-image: url("/static/imgs/avatar.png");
     background-repeat: no-repeat;
