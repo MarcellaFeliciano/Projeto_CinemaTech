@@ -1,5 +1,6 @@
 from flask import render_template, Blueprint, url_for, request, session,flash, redirect
 from models.cliente import Cliente
+from models.filme import Filme, Sessao, Genero
 
 from flask_login import login_required, login_user, logout_user, current_user
 
@@ -10,8 +11,8 @@ bp = Blueprint('clientes', __name__, url_prefix='/clientes')
 def index():
     if 'user' in session:
         user = session['user']
-        return render_template('clientes/index.html', user=user)
-    return render_template('clientes/index.html', clientes = Cliente.all())
+        return render_template('clientes/index.html', user=user, filmes = Filme.all(), sessoes = Sessao.all())
+    return render_template('clientes/index.html', clientes = Cliente.all(), filmes = Filme.all(), sessoes = Sessao.all())
 
 @bp.route('/cadastrar_cliente', methods=['POST', 'GET'])
 def cadastrar_cliente():
