@@ -28,6 +28,41 @@ class Genero(db.Model):
         return db.session.query(cls).all()
 
 
+class Sessao(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    filme_id: Mapped[int] = mapped_column(ForeignKey('filme.id'), nullable=False)
+    horario: Mapped[str] = mapped_column()
+    data:  Mapped[str] = mapped_column()
+    sala: Mapped[str] = mapped_column()
+
+     # Relacionamento com Filme
+    filme: Mapped['Filme']=relationship('Filme', back_populates='sessoes')
+    
+    @classmethod
+    def all(cls):
+        return db.session.query(cls).all()
+    
+    @classmethod
+    def all_order(cls):
+        return cls.query.join(Filme).order_by(Filme.titulo).all()
+
+    @classmethod
+    def get(cls, id):
+        return cls.query.get_or_404(id)
+
+    @classmethod
+    def add_sessao(cls, filme_id, horario, sala, data):
+        sessao = cls(filme_id=filme_id, horario=horario,data=data, sala=sala)
+        db.session.add(sessao)
+        db.session.commit()
+
+    @classmethod
+    def edit_filme_id(cls, id, filme_id):
+        filme = cls.get(id)
+        filme.filme_id = filme_id
+        db.session.commit()
+
+
 class Filme(db.Model):
     __tablename__ = 'filme'  # Adicionando o nome da tabela
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -40,6 +75,9 @@ class Filme(db.Model):
 
     # Relação com Genero
     generos: Mapped[List[Genero]] = relationship('Genero', secondary=filmes_generos, back_populates='filmes')
+
+    # Relacionamento com Sessao
+    sessoes: Mapped[List[Sessao]] = relationship('Sessao', back_populates='filme')
 
     @classmethod
     def all(cls):
@@ -74,29 +112,3 @@ class Filme(db.Model):
         filme.titulo = titulo
         db.session.commit()
 
-
-class Sessao(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True)
-    filme_id: Mapped[int] = mapped_column(ForeignKey('filme.id'), nullable=False)
-    horario: Mapped[str] = mapped_column()
-    sala: Mapped[str] = mapped_column()
-
-    @classmethod
-    def all(cls):
-        return db.session.query(cls).all()
-
-    @classmethod
-    def get(cls, id):
-        return cls.query.get_or_404(id)
-
-    @classmethod
-    def add_sessao(cls, filme_id, horario, sala):
-        filme = cls(filme_id=filme_id, horario=horario, sala=sala)
-        db.session.add(filme)
-        db.session.commit()
-
-    @classmethod
-    def edit_filme_id(cls, id, filme_id):
-        filme = cls.get(id)
-        filme.filme_id = filme_id
-        db.session.commit()

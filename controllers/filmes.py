@@ -21,7 +21,7 @@ def index():
         user = session['user']
         return render_template('filmes/index.html', user=user,filmes = Filme.all(), sessoes = Sessao.all())
     
-    return render_template('filmes/index.html', filmes = Filme.all(), sessoes = Sessao.all())
+    return render_template('filmes/index.html', filmes = Filme.all(), sessoes = Sessao.all_order())
   
 @bp.route('/add_filme', methods=['POST', 'GET'])
 def add_filme():
@@ -63,12 +63,12 @@ def add_filme():
 def add_sessao():
     if request.method == 'POST':
         filme = request.form['filme']
+        data = request.form['data']
         horario = request.form['horario']
         sala = request.form['sala']
-        if filme and horario and sala:
-
-            Sessao.add_sessao(filme_id=filme, horario=horario, sala=sala)
-            #sessoes.append({'filme': filme, 'horario': horario})
+            
+        Sessao.add_sessao(filme_id=filme, data=data, horario=horario, sala=sala)
+            
         return redirect(url_for('filmes.index'))
     
     else:

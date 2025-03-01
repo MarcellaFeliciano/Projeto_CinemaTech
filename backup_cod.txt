@@ -1,3 +1,13 @@
+# Tabela associativa para o relacionamento muitos-para-muitos
+filmes_sessoes = Table(
+    'filmes_sessoes',
+    db.Model.metadata,
+    Column('filmes_id', ForeignKey('filme.id'), primary_key=True),
+    Column('sessoes_id', ForeignKey('sessao.id'), primary_key=True)
+)
+
+
+
 
     <h2>Cadastro de Filmes</h2>
     <form action="{{ url_for('filmes.add_filme') }}" method="POST">

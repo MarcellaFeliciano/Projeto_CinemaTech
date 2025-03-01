@@ -29,13 +29,29 @@
                     </div>
                 {% endfor %}
             </div>
-           
+            <div class="container">
+                <h1>Sessões Cadastradas</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Filme</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Sala</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sessao in sessoes %}
+                            <tr>
+                                <td>{{ sessao.filme.titulo }}</td>
+                                <td>{{ sessao.data }}</td>
+                                <td>{{ sessao.horario }}</td>
+                                <td>{{ sessao.sala }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
-            <h2>Sessões Criadas</h2>
-            <ul>
-                {% for sessao in sessoes %}
-                    <li>{{ sessao.filme_id }} - {{ sessao.horario }}</li>
-                {% endfor %}
-            </ul>
         </div>
     {% endblock %}
