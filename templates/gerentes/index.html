@@ -4,35 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../../static/style.css">
 </head>
 <body>
     
+    <header>
+        <div class="logo"><img src="../static/imgs/logo.png" alt=""></div>
+        <div class="opcoes">
+            <a href="{{ url_for('index')}}"><button>Home</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
+            <a href="{{ url_for('filmes.add_filme')}}"><button>Adicionar Filme</button></a>
+            <a href="{{ url_for('filmes.add_sessao')}}"><button>Adicionar Sessão</button></a>
+            <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
+        </div>
 
-    <h2>Área do Gerente</h2>
+    </header>
 
-    <main>
-
-        <aside>
-            <h1> CINETECH</h1>
-            <a href="{{ url_for('filmes.index')}}">Filmes</a>
-            <a href="{{ url_for('filmes.index')}}">Lançamento</a>
-            <a href="{{ url_for('filmes.index')}}">Avaliações</a>
-            <a href="{{ url_for('filmes.index')}}">Programação</a>
-            <a href="{{ url_for('filmes.index')}}">Reserva</a>
-            <a href="{{ url_for('filmes.add_filme')}}">Adicionar Filme</a>
-            <a href="{{ url_for('filmes.add_sessao')}}">Adicionar Sessão</a>
-            <a href="{{ url_for('gerentes.logout')}}">Logout</a>
-
-
-        </aside>
-
-        <section>
-
-            <h3>Informações do Site</h3>
-
-
-        </section>
-    </main>
-
+    <aside>
+        <div class="deadpool"></div>
+    </aside>
+    <section>
+        <div class="procurador">
+            <div class="filtros">
+                <select name="categoria" id="categoria" required>
+                    <option value="" disabled selected>Gênero</option>
+                    <option value="Eletrodoméstico">A</option>
+                    <option value="Eletrodoméstico">B</option>
+                </select>
+                <select name="categoria" id="categoria" required>
+                    <option value="" disabled selected>Lançamento</option>
+                    <option value="Eletrodoméstico">A</option>
+                    <option value="Eletrodoméstico">B</option>
+                </select>
+                <select name="categoria" id="categoria" required>
+                    <option value="" disabled selected>Avalição</option>
+                    <option value="Eletrodoméstico">A</option>
+                    <option value="Eletrodoméstico">B</option>
+                </select>
+            </div>
+        </div>
+        <br>
+    </section>
 </body>
 </html>

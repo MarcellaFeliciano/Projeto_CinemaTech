@@ -1,4 +1,45 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/login.css">
+</head>
+<body>
+    <div class="conteiner">
+        <div class="caixa">
+            <div class="box-1">
+                <div class="bem-vindo">
+                    <div class="mensagem">
+                    </div>
+                </div>
+                <div class="box-2">
+                    <h1>Login</h1>
+                    <div class="login">
+                        <form action="{{ url_for('clientes.login_cliente') }}" method="post">
+                            <input type="text" id="nome" name="nome" placeholder="nome" required><br>
+                            <input type="email" id="email" name="email" placeholder="email" required><br>
+                            <input type="password" id="senha" name="senha" placeholder="senha" required><br>
+                            
+                            <button class="cadastro" onclick="registerUser()">Entrar</button>
+                        </form>
+                        <div class="sucessor">
+                            <p id="d">Ainda não tem uma conta? <a href="{{url_for('clientes.cadastrar_cliente')}}">Cadastre-se</a></p>
+                            <p id="d"><a href="{{url_for('gerentes.login_gerente')}}">Entrar como gerente</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -18,9 +59,9 @@
                 <div class="box-2">
                     <h1>Login</h1>
                     <div class="login">
-                        <input id="nome" placeholder="nome" autocomplete="off"><br>
-                        <input id="email" placeholder="email" autocomplete="off"><br>
-                        <input id="senha" placeholder="senha" autocomplete="off"><br>
+                        <input id="nome" placeholder="nome"><br>
+                        <input id="email" placeholder="email" ><br>
+                        <input id="senha" placeholder="senha"><br>
 
                         <button class="cadastro" onclick="registerUser()">Entrar</button>
                         <div class="sucessor">

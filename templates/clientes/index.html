@@ -1,25 +1,32 @@
-{% extends 'base.html' %}
-    {% block header %}
-            {% if user: %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="../static/imgs/logo.png" alt=""></div>
+        <div class="opcoes">
+            <a href="{{ url_for('clientes.index')}}"><button>Home</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Lançamento</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Programação</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Reserva</button></a>
             <a href="{{ url_for('clientes.logout')}}"><button>Logout</button></a>
-            {% elif gerente: %}
-            <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
-            {% else %}
-            <a href="{{ url_for('clientes.login_cliente')}}"><button>Login</button></a>
-            {% endif %}
-    {% endblock %}
-    {% block aside %}
+        </div>
+    </header>
+    <aside>
         <div class='intro_clientes'>
             <h3 style="color: white;">Bem Vindo ao CINETECH {{user}}</h3>
         </div>
-    {% endblock %}
-    {% block section %}
+    </aside>
+    <section>
         <div>
-            <h4>Suas reservas</h4>
+            <h4>Suas reservas:</h4>
         </div>
-        <div>
-            <h4>Suas avaliações</h4>
-        </div>
-    {% endblock%}
+    </section>
 </body>
 </html>
