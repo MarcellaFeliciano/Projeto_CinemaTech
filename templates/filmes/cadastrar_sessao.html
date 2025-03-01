@@ -4,30 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../static/sessoes.css">
+    <link rel="stylesheet" href="../../static/filme.css">
 </head>
 <body>
+    <header>
+        <div class="logo"><img src="../static/imgs/logo.png" alt=""></div>
+        {% if user: %}
+        <div class="opcoes">
+            <a href="{{ url_for('clientes.index')}}"><button>Home</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Lançamento</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Programação</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Reserva</button></a>
+            <a href="{{ url_for('clientes.logout')}}"><button>Logout</button></a>
+        </div>
 
-    <h2>Criar Sessão</h2>
-    <form action="{{ url_for('filmes.add_sessao') }}" method="POST">
-        <label for="filme">Filme:</label>
-        <select name="filme" required>
-            {% for filme in filmes %}
-                <option value="{{ filme.id }}">{{ filme.titulo }}</option>
-            {% endfor %}
-        </select>
+        {% elif gerente: %}
+        <div class="opcoes">
+            <a href="{{ url_for('index')}}"><button>Home</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
+            <a href="{{ url_for('filmes.add_filme')}}"><button>Adicionar Filme</button></a>
+            <a href="{{ url_for('filmes.add_sessao')}}"><button>Adicionar Sessão</button></a>
+            <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
+        </div>
+        {% else %}
+        <div class="opcoes">
+            <a href="{{ url_for('index')}}"><button>Home</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Lançamento</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Avaliações</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Programação</button></a>
+            <a href="{{ url_for('filmes.index')}}"><button>Reserva</button></a>
+            <a href="{{ url_for('clientes.login_cliente')}}"><button>Login</button></a>
+        </div>
+        {% endif %}
+    </header>
+    <aside>
+        <div class="forms_add">
+            <h2>Criar Sessão</h2>
+            <form action="{{ url_for('filmes.add_sessao') }}" method="POST">
+                <div class="form-group">
+                    <label for="filme">Filme:</label>
+                    <select name="filme" required>
+                        {% for filme in filmes %}
+                            <option value="{{ filme.id }}">{{ filme.titulo }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="data">Data:</label>
+                    <input type="date" name="data" required>
+                </div>
         
-        <label for="data">Data:</label>
-        <input type="date" name="data" required>
-
-        <label for="horario">Horário:</label>
-        <input type="time" name="horario" required>
-        
-        <label for="sala">Sala da sessão:</label>
-        <input type="text" name="sala" required>
-        
-        <button type="submit">Criar Sessão</button>
-    </form>
+                <div class="form-group">
+                    <label for="horario">Horário:</label>
+                    <input type="time" name="horario" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sala">Sala da sessão:</label>
+                    <input type="text" name="sala" required>
+                </div>
+                
+                <button type="submit">Criar Sessão</button>
+            </form>
+        </div>
+    </aside>
     
 </body>
 </html>

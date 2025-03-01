@@ -9,7 +9,26 @@
 <body>
     <div class="conteiner">
         <header>
-            <h2>CINETECH</h2>
+            <div class="logo"><img src="../static/imgs/logo.png" alt=""></div>
+            {% if user: %}
+            <div class="opcoes">
+                <a href="{{ url_for('clientes.index')}}"><button>Home</button></a>
+                <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
+                <a href="{{ url_for('filmes.index')}}"><button>Lançamento</button></a>
+                <a href="{{ url_for('filmes.index')}}"><button>Programação</button></a>
+                <a href="{{ url_for('filmes.index')}}"><button>Reserva</button></a>
+                <a href="{{ url_for('clientes.logout')}}"><button>Logout</button></a>
+            </div>
+    
+            {% elif gerente: %}
+            <div class="opcoes">
+                <a href="{{ url_for('index')}}"><button>Home</button></a>
+                <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
+                <a href="{{ url_for('filmes.add_filme')}}"><button>Adicionar Filme</button></a>
+                <a href="{{ url_for('filmes.add_sessao')}}"><button>Adicionar Sessão</button></a>
+                <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
+            </div>
+            {% else %}
             <div class="opcoes">
                 <a href="{{ url_for('index')}}"><button>Home</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
@@ -17,14 +36,9 @@
                 <a href="{{ url_for('filmes.index')}}"><button>Avaliações</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Programação</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Reserva</button></a>
-                {% if user: %}
-                <a href="{{ url_for('clientes.logout')}}"><button>Logout</button></a>
-                {% elif gerente: %}
-                <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
-                {% else %}
                 <a href="{{ url_for('clientes.login_cliente')}}"><button>Login</button></a>
-                {% endif %}
             </div>
+            {% endif %}
         </header>
         <aside>
             <div class="forms_add">

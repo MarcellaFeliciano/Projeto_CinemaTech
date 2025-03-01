@@ -7,10 +7,9 @@ body {
     text-align: center;
     overflow-x: hidden;
 }
-
 header {
     width: 100vw;
-    height: 8vh;
+    height: 10vh;
     background-color: crimson;
     display: flex;
     flex-direction: row;
@@ -19,13 +18,42 @@ header {
     justify-content: space-between;
 }
 
+.logo {
+    width: 15%;
+    height: 100%;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
 .opcoes {
     padding: 5px;
     margin-right: 30px;
+    
+}
+.opcoes a button {
+    margin: 5px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    width: auto;
+    height: 25px;
+    padding: 5px;
 }
 
 .opcoes a {
-    margin: 5px;
+    margin: 2px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    width: auto;
+    height: 25px;
+}
+
+.opcoes a button:hover {
+    background-color: black;
 }
 
 aside {

@@ -57,7 +57,7 @@ aside {
     background-color: crimson;
     color: white;
     border: none;
-    width: 90px;
+    width: auto;
     height: 25px;
     padding: 5px;
 }
@@ -67,7 +67,7 @@ aside {
     background-color: crimson;
     color: white;
     border: none;
-    width: 90px;
+    width: auto;
     height: 25px;
 }
 

@@ -18,8 +18,6 @@
                 <a href="{{ url_for('index')}}"><button>Home</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Lançamento</button></a>
-                <a href="{{ url_for('filmes.index')}}"><button>Avaliações</button></a>
-                <a href="{{ url_for('filmes.index')}}"><button>Programação</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Reserva</button></a>
                 {% if user: %}
                 <a href="{{ url_for('clientes.logout')}}"><button>Logout</button></a>
@@ -49,7 +47,7 @@
                 {% if not user:%}
                 <div class="deadpool_bt_login"> 
                     <button>
-                        <a href="{{ url_for('clientes.login_cliente')}}">Para ter ACESSO a mais filmes CADASTRE-SE!</a>
+                        <a href="{{ url_for('clientes.cadastrar_cliente')}}">Para ter ACESSO a mais filmes CADASTRE-SE!</a>
                     </button>
                 </div>
                 {% endif %}
