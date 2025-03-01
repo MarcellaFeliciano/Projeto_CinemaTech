@@ -203,4 +203,4 @@ def index ():
         user = session['user']
         return render_template('index.html', user=user,filmes = Filme.all(), sessoes = Sessao.all())
     
-    return render_template ('index.html')
+    return render_template ('index.html',filmes = Filme.all(), sessoes = Sessao.all())
