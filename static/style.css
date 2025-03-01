@@ -52,8 +52,27 @@ aside {
     margin-right: 30px;
     
 }
-.opcoes a {
+.opcoes a button {
     margin: 5px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    width: 90px;
+    height: 25px;
+    padding: 5px;
+}
+
+.opcoes a {
+    margin: 2px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    width: 90px;
+    height: 25px;
+}
+
+.opcoes a button:hover {
+    background-color: black;
 }
 
 .deadpool {
