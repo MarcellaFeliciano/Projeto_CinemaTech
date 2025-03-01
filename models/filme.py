@@ -65,6 +65,22 @@ class Sessao(db.Model):
         filme.filme_id = filme_id
         db.session.commit()
 
+"""
+class Reserva(db.Model):
+    __tablename__ = 'reserva'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    sessão_id: Mapped[int] = mapped_column(nullable=False)  # Adicionando nullable=False
+    cliente_id: Mapped[int] = mapped_column(nullable=False)  # Adicionando nullable=False
+    assentos_reservados: Mapped[str] = mapped_column(nullable=False)
+
+    @classmethod
+    def add_reserva(cls, sessao_id, cliente_id, assentos_reservados):
+        new_reserva = Reserva(sessao_id=sessao_id, cliente_id=cliente_id, assentos_reservados=assentos_reservados)
+        db.session.add(new_reserva)
+        db.session.commit()
+
+"""
+
 
 class Filme(db.Model):
     __tablename__ = 'filme'  # Adicionando o nome da tabela
@@ -72,7 +88,7 @@ class Filme(db.Model):
     titulo: Mapped[str] = mapped_column(nullable=False)  # Adicionando nullable=False
     duracao: Mapped[str] = mapped_column(nullable=False)  # Adicionando nullable=False
     sinopse: Mapped[str] = mapped_column(nullable=False)
-    classificacao: Mapped[int] = mapped_column(nullable=False)
+    classificacao: Mapped[str] = mapped_column(nullable=False)
     data_lancamento: Mapped[str] = mapped_column(nullable=False)
     imagem: Mapped[str] = mapped_column(nullable=False)
 
