@@ -10,6 +10,7 @@
     <div class="conteiner">
         <header>
             <div class="logo"><img src="../static/imgs/logo.png" alt=""></div>
+<<<<<<< Updated upstream
             {% if user: %}
             <div class="opcoes">
                 <a href="{{ url_for('clientes.index')}}"><button>Home</button></a>
@@ -29,6 +30,8 @@
                 <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
             </div>
             {% else %}
+=======
+>>>>>>> Stashed changes
             <div class="opcoes">
                 <a href="{{ url_for('index')}}"><button>Home</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
@@ -53,18 +56,7 @@
                         <label for="sinopse">Sinopse:</label>
                         <input type="text" name="sinopse" required>
                     </div>
-            
-                    <div class="form-group">
-                        <label for="genero">Gênero:</label>
-                        <div class="checkbox-group">
-                            {% for genero in generos %}
-                                <div>
-                                    <input type="checkbox" name="generos" value="{{ genero.nome }}" id="{{ genero.nome }}">
-                                    <label for="{{ genero.nome }}">{{ genero.nome }}</label>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
+
             
                     <div class="form-group">
                         <label for="duracao">Duração:</label>
@@ -86,6 +78,17 @@
                         <input type="file" name="file" required>
                     </div>
             
+                    <div class="form-group generos">
+                        <label for="genero">Gênero:</label>
+                        <div class="checkbox-group genero">
+                            {% for genero in generos %}
+                                <div>
+                                    <input type="checkbox" name="generos" value="{{ genero.nome }}" id="{{ genero.nome }}">
+                                    <label for="{{ genero.nome }}">{{ genero.nome }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                     <button id="adicionar" type="submit">Adicionar Filme</button>
                 </form>
             </div>

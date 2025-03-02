@@ -126,6 +126,14 @@ class Filme(db.Model):
         db.session.commit()
 
     @classmethod
+    def excluir_filme(cls,id):
+        db.session.query(filmes_generos).filter_by(filmes_id=id).delete()
+        db.session.commit()
+
+        db.session.query(cls).filter_by(id=id).delete()
+        db.session.commit()
+
+    @classmethod
     def edit_titulo(cls, id, titulo):
         filme = cls.get(id)
         filme.titulo = titulo

@@ -73,8 +73,10 @@
                         <p><strong>Sinopse:</strong> {{ filme.sinopse }}</p>
                         <p><strong>Gêneros:</strong> {{ filme.generos | map(attribute='nome') | join(', ') }}</p>
                     
-                        <a href="{{ url_for('filmes.editar_filme', id=filme.id) }}">Editar</a>
-                        <a href="{{ url_for('filmes.excluir_filme', id=filme.id) }}" onclick="return confirm('Tem certeza que deseja deletar esta atividade?');">Deletar</a>
+
+                        {%if gerente: %}
+                        <a href="{{ url_for('filmes.excluir_filme', id=filme.id) }}" onclick="return confirm('Tem certeza que deseja deletar este filme?');">Deletar</a>
+                        {% endif %}
                         <a href="{{ url_for('filmes.ver_sessoes', id=filme.id) }}" >Sessões Disponíveis</a>
     
                     </div>

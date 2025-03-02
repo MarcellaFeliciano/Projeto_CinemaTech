@@ -25,6 +25,7 @@ header {
     justify-content: space-between;
 }
 
+
 .logo {
     width: 15%;
     height: 100%;
@@ -282,7 +283,7 @@ section{
     background-color: #f8f8f8;
     border: 1px solid #ddd;
     border-radius: 8px;
-    width: 280px;
+    width: 300px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s;
@@ -304,4 +305,63 @@ section{
 .filme-card p {
     margin: 5px 10px;
     font-size: 0.9em;
+}
+
+.filme-card a{
+    padding:2px;
+    color: red;
+    
+
+}
+
+
+
+
+.box-sessao {
+    width: 55%;
+    margin: 0 auto;
+    margin-top: 60px; /* Centraliza a div */
+    background-color: whitesmoke; /* Cor de fundo */
+    padding: 20px;
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+h1 {
+    text-align: center;
+    color: black; /* Cor do título */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remove espaços entre as células */
+    margin-top: 20px; /* Espaço acima da tabela */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left; /* Alinhamento à esquerda */
+    border-bottom: 1px solid grey; /* Linha de separação */
+}
+
+th {
+    background-color: lightcoral; /* Cor de fundo do cabeçalho */
+    color: white; /* Cor do texto do cabeçalho */
+}
+
+tr:hover {
+    background-color: whitesmoke; /* Cor de destaque ao passar o mouse */
+}
+
+.btn-reserva {
+    display: inline-block; /* Exibe como bloco */
+    padding: 10px 15px;
+    background-color: lightcoral; /* Cor do botão */
+    color: white; /* Cor do texto do botão */
+    text-decoration: none; /* Remove o sublinhado */
+    border-radius: 5px; /* Bordas arredondadas do botão */
+}
+
+.btn-reserva:hover {
+    background-color: red; /* Cor do botão ao passar o mouse */
 }

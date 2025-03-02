@@ -18,6 +18,11 @@ header {
     justify-content: space-between;
 }
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 .logo {
     width: 15%;
     height: 100%;
@@ -38,7 +43,11 @@ header {
     background-color: crimson;
     color: white;
     border: none;
+<<<<<<< Updated upstream
     width: auto;
+=======
+    width: 90px;
+>>>>>>> Stashed changes
     height: 25px;
     padding: 5px;
 }
@@ -48,13 +57,23 @@ header {
     background-color: crimson;
     color: white;
     border: none;
+<<<<<<< Updated upstream
     width: auto;
     height: 25px;
 }
 
 .opcoes a button:hover {
     background-color: black;
+=======
+    width: 90px;
+    height: 25px;
+>>>>>>> Stashed changes
 }
+
+.opcoes a button:hover {
+    background-color: black;
+}
+
 
 aside {
     width: 100%;
@@ -83,19 +102,21 @@ h2 {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     align-items: center;
+    height:80%;
 }
 
 form {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: 90%;
+    height:90%
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
     width: 48%;
-    margin: 10px 1%;
+    margin: 5px 1%;
 }
 
 label {
@@ -113,6 +134,8 @@ input[type="text"], input[type="number"], input[type="date"], input[type="file"]
 .checkbox-group {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
 }
 
 /* Botão de envio */
@@ -137,4 +160,33 @@ input[type="text"], input[type="number"], input[type="date"], input[type="file"]
 div {
     text-align: left;
     margin-bottom: 10px;
+}
+
+
+
+.form-group.generos {
+    margin: 20px 0; /* Espaço entre os grupos de formulário */
+    width: 100%;
+    display:flex;
+    padding-left: 10px;
+
+
+}
+
+.checkbox-group .genero{
+    display: flex; /* Ativa o flexbox */
+    flex-wrap: wrap; /* Permite que os itens se ajustem em várias linhas */
+    gap: 1px; /* Espaço entre os checkboxes */
+    flex-direction: row;
+    width: 100%;
+
+}
+
+.checkbox-group.genero div {
+    margin:0;
+    padding:0;
+    width: auto;
+    top: 5%;
+    display: inline; /* Alinha o checkbox e o label */
+
 }

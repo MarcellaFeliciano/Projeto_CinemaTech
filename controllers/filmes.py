@@ -1,5 +1,5 @@
 from flask import render_template, Blueprint, url_for, request, flash, redirect, session, current_app
-from models.filme import Filme, Sessao, Genero
+from models.filme import Filme, Sessao, Genero, filmes_generos
 from werkzeug.utils import secure_filename
 import os
 
@@ -55,6 +55,13 @@ def add_filme():
         return redirect(url_for('filmes.index'))
 
     else:
+        if 'gerente' in session:
+            gerente = session['gerente']
+            return render_template('filmes/cadastrar_filme.html', gerente=gerente,filmes = Filme.all(), generos=Genero.all(), sessoes = Sessao.all())
+        elif 'user' in session:
+            user = session['user']
+            return render_template('filmes/cadastrar_filme.html', user=user,filmes = Filme.all(), sessoes = Sessao.all(), generos=Genero.all())
+    
         return render_template('filmes/cadastrar_filme.html', filmes=Filme.all(), sessoes=Sessao.all(), generos=Genero.all())
 
 
@@ -81,16 +88,11 @@ def ver_sessoes(id):
     return render_template('filmes/sessoes.html', sessoes = Sessao.filter_by_id(filme_id=id))
     
 
-@bp.route('/editar_filme/<int:id>', methods=['POST','GET'])
-def editar_filme(id):
-
-    return render_template('filmes/sessoes.html', sessoes = Sessao.filter_by_id(filme_id=id))
-    
 @bp.route('/excluir_filme/<int:id>', methods=['POST','GET'])
 def excluir_filme(id):
+    Filme.excluir_filme(id=id)
+    return redirect(url_for('filmes.index'))
 
-    return render_template('filmes/sessoes.html', sessoes = Sessao.filter_by_id(filme_id=id))
-    
 
 @bp.route('/reserva', methods=['POST','GET'])
 def reserva():
