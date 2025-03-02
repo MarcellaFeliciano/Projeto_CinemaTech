@@ -7,7 +7,11 @@ bp = Blueprint('gerentes', __name__, url_prefix='/gerentes')
 
 @bp.route('/')
 def index():
-    return render_template('gerentes/index.html', gerentes = Gerente.all(),  filmes = Filme.all(), sessoes = Sessao.all())
+    if 'gerente' in session:
+        gerente = session['gerente']
+        return render_template('gerentes/index.html', gerentes = Gerente.all(),  filmes = Filme.all(), sessoes = Sessao.all())
+
+    return render_template('index.html', gerentes = Gerente.all(),  filmes = Filme.all(), sessoes = Sessao.all())
 
 @bp.route('/login_gerente', methods=['GET', 'POST'])
 def login_gerente():

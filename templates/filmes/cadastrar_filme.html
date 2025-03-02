@@ -10,14 +10,13 @@
     <div class="conteiner">
         <header>
             <div class="logo"><img src="../static/imgs/logo.png" alt=""></div>
-<<<<<<< Updated upstream
             {% if user: %}
             <div class="opcoes">
                 <a href="{{ url_for('clientes.index')}}"><button>Home</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Lançamento</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Programação</button></a>
-                <a href="{{ url_for('filmes.index')}}"><button>Reserva</button></a>
+                <a href="{{ url_for('filmes.ver_sessoes', id=0)}}"><button>Reserva</button></a>
                 <a href="{{ url_for('clientes.logout')}}"><button>Logout</button></a>
             </div>
     
@@ -30,15 +29,13 @@
                 <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
             </div>
             {% else %}
-=======
->>>>>>> Stashed changes
             <div class="opcoes">
                 <a href="{{ url_for('index')}}"><button>Home</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Lançamento</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Avaliações</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Programação</button></a>
-                <a href="{{ url_for('filmes.index')}}"><button>Reserva</button></a>
+                <a href="{{ url_for('filmes.ver_sessoes', id=0)}}"><button>Reserva</button></a>
                 <a href="{{ url_for('clientes.login_cliente')}}"><button>Login</button></a>
             </div>
             {% endif %}

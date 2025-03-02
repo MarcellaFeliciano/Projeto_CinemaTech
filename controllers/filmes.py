@@ -1,5 +1,6 @@
-from flask import render_template, Blueprint, url_for, request, flash, redirect, session, current_app
-from models.filme import Filme, Sessao, Genero, filmes_generos
+from flask import render_template,jsonify, Blueprint, url_for, request, flash, redirect, session, current_app
+from flask_login import login_required
+from models.filme import Filme, Sessao, Genero, filmes_generos, Reserva
 from werkzeug.utils import secure_filename
 import os
 
@@ -79,14 +80,32 @@ def add_sessao():
         return redirect(url_for('filmes.index'))
     
     else:
-        return render_template('filmes/cadastrar_sessao.html', filmes = Filme.all(), sessoes = Sessao.all())
+        if 'gerente' in session:
+            gerente = session['gerente']
+            return render_template('filmes/cadastrar_sessao.html', gerente=gerente,filmes = Filme.all(), generos=Genero.all(), sessoes = Sessao.all())
+        
+        return render_template('filmes/index.html', filmes = Filme.all(), sessoes = Sessao.all(),generos=Genero.all())
 
 
 @bp.route('/sessoes/<int:id>', methods=['POST','GET'])
+@login_required
 def ver_sessoes(id):
+    user = session['user']
+    if id == 0:
 
-    return render_template('filmes/sessoes.html', sessoes = Sessao.filter_by_id(filme_id=id))
-    
+        sessoes = Sessao.all()
+        if sessoes:
+            return render_template('filmes/sessoes_disponiveis.html',user=user, sessoes = sessoes)
+        else:
+            return render_template('filmes/sessoes_disponiveis.html',user=user, sessoes = sessoes, menssage = 'Nenhuma sessão disponível no momento!')
+        
+    else:
+        sessoes = Sessao.filter_by_id(filme_id=id)
+        if sessoes:
+            return render_template('filmes/sessoes.html',user=user, sessoes = sessoes)
+        else:
+            return render_template('filmes/sessoes.html',user=user, sessoes = sessoes, menssage = 'Nenhuma sessão disponível no momento!')
+
 
 @bp.route('/excluir_filme/<int:id>', methods=['POST','GET'])
 def excluir_filme(id):
@@ -100,21 +119,19 @@ def reserva():
     return render_template('filmes/reserva.html', sessoes = Sessao.all())
     
 
-"""
 
 @bp.route('/reservar', methods=['POST','GET'])
+@login_required
 def reservar():
     if request.method == 'POST':
         data = request.get_json()
         user_id = data['user_id']
         session_id = data['session_id']
         seats = ','.join(data['seats'])  # Converte a lista de assentos em uma string
-
-        new_reserva = Reserva(sessao_id=session_id, cliente_id=user_id, assentos_reservados=seats)
-        db.session.add(new_reserva)
-        db.session.commit()
+        Reserva.add_reserva(sessao_id=session_id, cliente_id=user_id, assentos_reservados=seats)
 
         return jsonify(success=True)
+    else: 
+        return render_template('filmes/reserva.html', sessao = Sessao.all())
     
 
-"""

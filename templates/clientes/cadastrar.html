@@ -16,6 +16,8 @@
                 </div>
                 <div class="box-2">
                     <h1>Cadastro</h1>
+                    {% with messages = get_flashed_messages() %}
+
                     <div class="login">
                         <form action="{{ url_for('clientes.cadastrar_cliente') }}" method="post">
                             <input type="text" id="nome" name="nome" placeholder="nome" required><br>
@@ -27,7 +29,13 @@
                         <div class="sucessor">
                             <p id="d">Já tem uma conta? <a href="{{url_for('clientes.login_cliente')}}">Login</a></p>
                         </div>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p style="color: red;">{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
                     </div>
+                    {% endwith %}
                 </div>
             </div>
         </div>

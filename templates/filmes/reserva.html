@@ -1,114 +1,141 @@
-{% extends 'base.html' %}
 
-    {% block css %}
-    <link rel="stylesheet" href="../static/reserva.css">
-    {% endblock %}
-    {% block aside %}
-        tirar
-    {% endblock %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Cadastro de Filmes</title>
+    <link rel="stylesheet" href="../../static/reserva.css">
 
-    {% block section%}
-    <div class="section_reserva">
+</head>
+<body>
 
-        <h1>Selecione seus Assentos</h1>
-        <div class="screen">Tela</div>
-        <div class="seat-map">
-            <!-- Fileira 1 -->
-            <div class="seat available" data-seat="A1"></div>
-            <div class="seat available" data-seat="A2"></div>
-            <div class="seat available" data-seat="A3"></div>
-            <div class="seat available" data-seat="A4"></div>
-            <div class="seat available" data-seat="A5"></div>
-            <div class="seat available" data-seat="A6"></div>
-            <div class="seat available" data-seat="A7"></div>
-            <div class="seat available" data-seat="A8"></div>
-            <div class="seat available" data-seat="A9"></div>
-            <div class="seat available" data-seat="A10"></div>
-            <!-- Fileira 2 -->
-            <div class="seat available" data-seat="B1"></div>
-            <div class="seat available" data-seat="B2"></div>
-            <div class="seat available" data-seat="B3"></div>
-            <div class="seat available" data-seat="B4"></div>
-            <div class="seat available" data-seat="B5"></div>
-            <div class="seat available" data-seat="B6"></div>
-            <div class="seat available" data-seat="B7"></div>
-            <div class="seat available" data-seat="B8"></div>
-            <div class="seat available" data-seat="B9"></div>
-            <div class="seat available" data-seat="B10"></div>
-            <!-- Fileira 3 -->
-            <div class="seat available" data-seat="C1"></div>
-            <div class="seat available" data-seat="C2"></div>
-            <div class="seat available" data-seat="C3"></div>
-            <div class="seat available" data-seat="C4"></div>
-            <div class="seat available" data-seat="C5"></div>
-            <div class="seat available" data-seat="C6"></div>
-            <div class="seat available" data-seat="C7"></div>
-            <div class="seat available" data-seat="C8"></div>
-            <div class="seat available" data-seat="C9"></div>
-            <div class="seat available" data-seat="C10"></div>
-            <!-- Fileira 4 -->
-            <div class="seat available" data-seat="D1"></div>
-            <div class="seat available" data-seat="D2"></div>
-            <div class="seat available" data-seat="D3"></div>
-            <div class="seat available" data-seat="D4"></div>
-            <div class="seat occupied" data-seat="D5"></div>
-            <div class="seat available" data-seat="D6"></div>
-            <div class="seat available" data-seat="D7"></div>
-            <div class="seat available" data-seat="D8"></div>
-            <div class="seat available" data-seat="D9"></div>
-            <div class="seat available" data-seat="D10"></div>
-            <!-- Fileira 5 -->
-            <div class="seat available" data-seat="E1"></div>
-            <div class="seat available" data-seat="E2"></div>
-            <div class="seat available" data-seat="E3"></div>
-            <div class="seat available" data-seat="E4"></div>
-            <div class="seat occupied" data-seat="E5"></div>
-            <div class="seat available" data-seat="E6"></div>
-            <div class="seat available" data-seat="E7"></div>
-            <div class="seat available" data-seat="E8"></div>
-            <div class="seat available" data-seat="E9"></div>
-            <div class="seat available" data-seat="E10"></div>
-        </div>
-        <button class="reserve-button">Reservar Assentos</button>
-        <script>
-            document.querySelectorAll('.seat.available').forEach(seat => {
-            seat.addEventListener('click', () => {
-                // Verifica se o assento já está ocupado
-                if (seat.classList.contains('occupied')) {
-                    return; // Não faz nada se o assento já estiver ocupado
-                }
+    <div class="container">
+        <header>
+            
+            <div class="logo"><img src="../static/imgs/logo.png" alt=""></div>
+            <div class="opcoes">
+                <a href="{{ url_for('index')}}"><button>Home</button></a>
+                <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
+                <a href="{{ url_for('filmes.index')}}"><button>Lançamento</button></a>
+                <a href="{{ url_for('filmes.ver_sessoes', id=0)}}"><button>Reserva</button></a>
+                {% if user: %}
+                <a href="{{ url_for('clientes.logout')}}"><button>Logout</button></a>
+                {% elif gerente: %}
+                <a href="{{ url_for('gerentes.logout')}}"><button>Logout</button></a>
+                {% else %}
+                <a href="{{ url_for('clientes.login_cliente')}}"><button>Login</button></a>
+                {% endif %}
+            </div>
+        
+        </header>
+        
+        
+      
+        <div class="section_reserva">
 
-                // Alterna a classe 'selected' ao clicar
-                seat.classList.toggle('selected');
+            <h1>Selecione seus Assentos</h1>
+            <div class="screen">Tela</div>
+            <div class="seat-map">
+                <!-- Fileira 1 -->
+                <div class="seat available" data-seat="A1"></div>
+                <div class="seat available" data-seat="A2"></div>
+                <div class="seat available" data-seat="A3"></div>
+                <div class="seat available" data-seat="A4"></div>
+                <div class="seat available" data-seat="A5"></div>
+                <div class="seat available" data-seat="A6"></div>
+                <div class="seat available" data-seat="A7"></div>
+                <div class="seat available" data-seat="A8"></div>
+                <div class="seat available" data-seat="A9"></div>
+                <div class="seat available" data-seat="A10"></div>
+                <!-- Fileira 2 -->
+                <div class="seat available" data-seat="B1"></div>
+                <div class="seat available" data-seat="B2"></div>
+                <div class="seat available" data-seat="B3"></div>
+                <div class="seat available" data-seat="B4"></div>
+                <div class="seat available" data-seat="B5"></div>
+                <div class="seat available" data-seat="B6"></div>
+                <div class="seat available" data-seat="B7"></div>
+                <div class="seat available" data-seat="B8"></div>
+                <div class="seat available" data-seat="B9"></div>
+                <div class="seat available" data-seat="B10"></div>
+                <!-- Fileira 3 -->
+                <div class="seat available" data-seat="C1"></div>
+                <div class="seat available" data-seat="C2"></div>
+                <div class="seat available" data-seat="C3"></div>
+                <div class="seat available" data-seat="C4"></div>
+                <div class="seat available" data-seat="C5"></div>
+                <div class="seat available" data-seat="C6"></div>
+                <div class="seat available" data-seat="C7"></div>
+                <div class="seat available" data-seat="C8"></div>
+                <div class="seat available" data-seat="C9"></div>
+                <div class="seat available" data-seat="C10"></div>
+                <!-- Fileira 4 -->
+                <div class="seat available" data-seat="D1"></div>
+                <div class="seat available" data-seat="D2"></div>
+                <div class="seat available" data-seat="D3"></div>
+                <div class="seat available" data-seat="D4"></div>
+                <div class="seat occupied" data-seat="D5"></div>
+                <div class="seat available" data-seat="D6"></div>
+                <div class="seat available" data-seat="D7"></div>
+                <div class="seat available" data-seat="D8"></div>
+                <div class="seat available" data-seat="D9"></div>
+                <div class="seat available" data-seat="D10"></div>
+                <!-- Fileira 5 -->
+                <div class="seat available" data-seat="E1"></div>
+                <div class="seat available" data-seat="E2"></div>
+                <div class="seat available" data-seat="E3"></div>
+                <div class="seat available" data-seat="E4"></div>
+                <div class="seat occupied" data-seat="E5"></div>
+                <div class="seat available" data-seat="E6"></div>
+                <div class="seat available" data-seat="E7"></div>
+                <div class="seat available" data-seat="E8"></div>
+                <div class="seat available" data-seat="E9"></div>
+                <div class="seat available" data-seat="E10"></div>
+            </div>
+            <button class="reserve-button">Reservar Assentos</button>    
+    </div>
+    <script>
+        document.querySelectorAll('.seat.available').forEach(seat => {
+        seat.addEventListener('click', () => {
+            // Verifica se o assento já está ocupado
+            if (seat.classList.contains('occupied')) {
+                return; // Não faz nada se o assento já estiver ocupado
+            }
 
-                // Altera a cor do assento para verde se selecionado
-                if (seat.classList.contains('selected')) {
-                    seat.style.backgroundColor = '#58d68d'; // Verde
-                } else {
-                    seat.style.backgroundColor = '#2ecc71'; // Cor original
-                }
-            });
-            });
+            // Alterna a classe 'selected' ao clicar
+            seat.classList.toggle('selected');
 
-            document.querySelector('.reserve-button').addEventListener('click', () => {
-                const selectedSeats = document.querySelectorAll('.seat.selected');
-                const seatNumbers = Array.from(selectedSeats).map(seat => seat.getAttribute('data-seat'));
+            // Altera a cor do assento para verde se selecionado
+            if (seat.classList.contains('selected')) {
+                seat.style.backgroundColor = '#58d68d'; // Verde
+            } else {
+                seat.style.backgroundColor = '#2ecc71'; // Cor original
+            }
+        });
+        });
 
-                if (seatNumbers.length > 0) {
-                    // Muda a cor dos assentos selecionados para vermelho e remove a classe 'selected'
-                    selectedSeats.forEach(seat => {
-                        seat.classList.remove('available');
-                        seat.classList.remove('selected');
-                        seat.classList.add('occupied'); // Adiciona classe ocupada
-                        seat.style.backgroundColor = '#e74c3c'; // Vermelho
-                        seat.style.cursor = 'not-allowed'; // Muda o cursor para indicar que não pode clicar
-                    });
-                    alert('Assentos reservados: ' + seatNumbers.join(', '));
-                } else {
-                    alert('Nenhum assento selecionado!');
-                }
-            });
-        </script>
-                
-        </div>   
-        {% endblock %}
+        document.querySelector('.reserve-button').addEventListener('click', () => {
+            const selectedSeats = document.querySelectorAll('.seat.selected');
+            const seatNumbers = Array.from(selectedSeats).map(seat => seat.getAttribute('data-seat'));
+
+            if (seatNumbers.length > 0) {
+                // Muda a cor dos assentos selecionados para vermelho e remove a classe 'selected'
+                selectedSeats.forEach(seat => {
+                    seat.classList.remove('available');
+                    seat.classList.remove('selected');
+                    seat.classList.add('occupied'); // Adiciona classe ocupada
+                    seat.style.backgroundColor = '#e74c3c'; // Vermelho
+                    seat.style.cursor = 'not-allowed'; // Muda o cursor para indicar que não pode clicar
+                });
+                alert('Assentos reservados: ' + seatNumbers.join(', '));
+            } else {
+                alert('Nenhum assento selecionado!');
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+

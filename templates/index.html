@@ -18,7 +18,7 @@
                 <a href="{{ url_for('index')}}"><button>Home</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Filmes</button></a>
                 <a href="{{ url_for('filmes.index')}}"><button>Lançamento</button></a>
-                <a href="{{ url_for('filmes.index')}}"><button>Reserva</button></a>
+                <a href="{{ url_for('filmes.ver_sessoes', id=0)}}"><button>Reserva</button></a>
                 {% if user: %}
                 <a href="{{ url_for('clientes.logout')}}"><button>Logout</button></a>
                 {% elif gerente: %}
@@ -60,18 +60,24 @@
                 <div class="filtros">
                     <select name="categoria" id="categoria" required>
                         <option value="" disabled selected>Gênero</option>
-                        <option value="Eletrodoméstico">A</option>
-                        <option value="Eletrodoméstico">B</option>
+                        <option value="Eletrodoméstico">Ficção</option>
+                        <option value="Eletrodoméstico">Drama</option>
+                        <option value="Eletrodoméstico">Comédia</option>
                     </select>
                     <select name="categoria" id="categoria" required>
                         <option value="" disabled selected>Lançamento</option>
-                        <option value="Eletrodoméstico">A</option>
-                        <option value="Eletrodoméstico">B</option>
+                        <option value="Eletrodoméstico">Oscars</option>
+                        <option value="Eletrodoméstico">Nacionais</option>
+                        <option value="Eletrodoméstico">Internacionais</option>
                     </select>
                     <select name="categoria" id="categoria" required>
                         <option value="" disabled selected>Avalição</option>
-                        <option value="Eletrodoméstico">A</option>
-                        <option value="Eletrodoméstico">B</option>
+                        <option value="Eletrodoméstico">5 Estrelas</option>
+                        <option value="Eletrodoméstico">4 Estrelas</option>
+                        <option value="Eletrodoméstico">3 Estrelas</option>
+                        <option value="Eletrodoméstico">2 Estrelas</option>
+                        <option value="Eletrodoméstico">1 Estrelas</option>
+                        
                     </select>
                 </div>
             </div>

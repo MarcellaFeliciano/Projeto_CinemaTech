@@ -65,7 +65,7 @@ class Sessao(db.Model):
         filme.filme_id = filme_id
         db.session.commit()
 
-"""
+
 class Reserva(db.Model):
     __tablename__ = 'reserva'
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -79,7 +79,6 @@ class Reserva(db.Model):
         db.session.add(new_reserva)
         db.session.commit()
 
-"""
 
 
 class Filme(db.Model):

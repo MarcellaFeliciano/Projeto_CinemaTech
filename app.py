@@ -29,6 +29,11 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Limite de 16 MB
 # Inicializa o controle de sessões
 login_manager.init_app(app)
 
+@login_manager.unauthorized_handler
+def unauthorized():
+    return render_template('login_required.html'), 403
+
+
 
 # configure the SQLite database, relative to the app instance folder
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
@@ -82,7 +87,7 @@ with app.app_context():
             "sinopse": "A versão em live-action do clássico da Disney, que segue a jornada de Simba, um leão que deve enfrentar seu destino como rei.",
             "classificacao": 'Livre',
             "data_lancamento": "2019-07-18",
-            "imagem": "avatar.jpg"  # Substitua pelo link da imagem
+            "imagem": "leao.jpg"  # Substitua pelo link da imagem
         },
         {
             "titulo": "Vingadores: Ultimato",
@@ -91,16 +96,16 @@ with app.app_context():
             "sinopse": "Os heróis restantes tentam reverter os danos causados por Thanos, que destruiu metade da vida no universo.",
             "classificacao": "12 anos",
             "data_lancamento": "2019-04-25",
-            "imagem": "avatar.jpg"  # Substitua pelo link da imagem
+            "imagem": "vingadores.jpg"  # Substitua pelo link da imagem
         },
         {
-            "titulo": "Frozen - Uma Aventura Congelante",
+            "titulo": "Frozen 2 - Uma Aventura Congelante",
             "generos": ['Animação', 'Aventura', 'Fantasia'],
             "duracao": '102 min',
             "sinopse": "A princesa Anna parte em uma jornada com um grupo improvável para encontrar sua irmã Elsa, cuja magia congelante ameaça o reino.",
             "classificacao": 'Livre',
             "data_lancamento": "2013-11-27",
-            "imagem": "avatar.jpg"  # Substitua pelo link da imagem
+            "imagem": "frozen.jpg"  # Substitua pelo link da imagem
         },
         {
             "titulo": "Jurassic World",
@@ -109,7 +114,7 @@ with app.app_context():
             "sinopse": "Um parque de dinossauros é reaberto ao público, mas logo um novo dinossauro geneticamente modificado escapa, colocando todos em perigo.",
             "classificacao": "12 anos",
             "data_lancamento": "2015-06-12",
-            "imagem": "avatar.jpg"  # Substitua pelo link da imagem
+            "imagem": "jurassic.jpg"  # Substitua pelo link da imagem
         },
         {
             "titulo": "Titanic",
@@ -118,7 +123,7 @@ with app.app_context():
             "sinopse": "Durante o fatídico naufrágio do Titanic, um romance improvável surge entre Rose e Jack, dois passageiros de classes sociais distintas.",
             "classificacao": "12 anos",
             "data_lancamento": "1997-12-19",
-            "imagem": "avatar.jpg"  # Substitua pelo link da imagem
+            "imagem": "titanic.jpg"  # Substitua pelo link da imagem
         },
         {
             "titulo": "Matrix",
@@ -127,7 +132,7 @@ with app.app_context():
             "sinopse": "Neo descobre que o mundo que conhece é uma simulação controlada por máquinas e se junta a um grupo para lutar pela liberdade da humanidade.",
             "classificacao": "14 anos",
             "data_lancamento": "1999-03-31",
-            "imagem": "avatar.jpg"  # Substitua pelo link da imagem
+            "imagem": "matrix.jpeg"  # Substitua pelo link da imagem
         },
         {
             "titulo": "O Senhor dos Anéis: A Sociedade do Anel",
@@ -136,7 +141,7 @@ with app.app_context():
             "sinopse": "Um grupo de heróis é formado para destruir o Anel do Poder e derrotar o Senhor das Trevas, Sauron.",
             "classificacao": "12 anos",
             "data_lancamento": "2001-12-19",
-            "imagem": "avatar.jpg"  # Substitua pelo link da imagem
+            "imagem": "senhor_aneis.jpg"  # Substitua pelo link da imagem
         },
         {
             "titulo": "A Origem",
@@ -145,7 +150,7 @@ with app.app_context():
             "sinopse": "Um ladrão especializado em roubar segredos através dos sonhos é desafiado a implantar uma ideia na mente de um alvo.",
             "classificacao": "12 anos",
             "data_lancamento": "2010-07-16",
-            "imagem": "avatar.jpg"  # Substitua pelo link da imagem
+            "imagem": "origem.jpg"  # Substitua pelo link da imagem
         },
         {
             "titulo": "Harry Potter e a Pedra Filosofal",
@@ -154,7 +159,7 @@ with app.app_context():
             "sinopse": "Um jovem menino descobre que é um bruxo e parte para Hogwarts, uma escola mágica, para aprender a controlar seus poderes.",
             "classificacao": 'Livre',
             "data_lancamento": "2001-11-10",
-            "imagem": "avatar.jpg"  # Substitua pelo link da imagem
+            "imagem": "potter.jpg"  # Substitua pelo link da imagem
         },
         {
             "titulo": "Pantera Negra",
@@ -163,7 +168,7 @@ with app.app_context():
             "sinopse": "T'Challa, o novo rei de Wakanda, deve enfrentar um inimigo que ameaça seu trono e a segurança de seu país.",
             "classificacao": "12 anos",
             "data_lancamento": "2018-02-15",
-            "imagem": "avatar.jpg"  # Substitua pelo link da imagem
+            "imagem": "pantera.jpg"  # Substitua pelo link da imagem
         }
     ]
 
@@ -186,6 +191,24 @@ with app.app_context():
                     genero.filmes.append(filme)
 
         # Comitar as associações de filmes com gêneros
+        db.session.commit()
+
+
+        # Lista de IDs dos filmes existentes (1 a 5)
+        filmes_ids = [1, 7, 3, 8, 5]
+
+        # Adiciona 1 ou 2 sessões para cada filme
+        for filme_id in filmes_ids:
+            for i in range(2):  # Altere para 1 se quiser apenas uma sessão
+                sessao = Sessao(
+                    filme_id=filme_id,  # ID do filme
+                    horario=f"{10 + i}:00",  # Exemplo de horários: 10:00, 11:00
+                    data="2025-03-05",  # Data fixa para a sessão (você pode alterar conforme necessário)
+                    sala=f"Sala {i + 1}"  # Nome da sala
+                )
+                db.session.add(sessao)
+
+        # Comitar as sessões
         db.session.commit()
 
 

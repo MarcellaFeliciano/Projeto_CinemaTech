@@ -8,6 +8,7 @@ from flask_login import login_required, login_user, logout_user, current_user
 bp = Blueprint('clientes', __name__, url_prefix='/clientes')
 
 @bp.route('/')
+@login_required
 def index():
     if 'user' in session:
         user = session['user']
@@ -23,6 +24,13 @@ def cadastrar_cliente():
 
         if not email:
             flash('Email é obrigatório')
+
+        emails_cli = Cliente.all()
+        for emails in emails_cli:
+            if email == emails.email:
+                flash('Email já cadastrado')
+                return redirect(url_for('clientes.cadastrar_cliente'))
+            
         else:
             Cliente.add_cliente(nome=nome,email=email,senha=senha)
             session['user'] = nome
